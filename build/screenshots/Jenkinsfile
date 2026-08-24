@@ -19,14 +19,14 @@ pipeline {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node-webtest', '-f build/Dockerfile.playwright .').inside {
-              sh 'pnpm run update:axonivy:next'
-              sh 'pnpm install --no-frozen-lockfile && pnpm run package'
+              sh 'pnpm install && pnpm run update:axonivy:next'
+              sh 'pnpm run package'
               dir ('playwright/rule-test-project') {
                 maven cmd: "-ntp verify -Dengine.page.url=${params.engineSource} -Dwebtest.cmd=webtest:screenshots"
               }
             }
           }
-          archiveArtifacts artifacts: '**/playwright/rule-test-project/target/screenshots/**', allowEmptyArchive: true
+          archiveArtifacts artifacts: 'playwright/rule-test-project/target/screenshots/**', allowEmptyArchive: true
           withChecks('Screenshots') {
             junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'playwright/**/report.xml'
           }

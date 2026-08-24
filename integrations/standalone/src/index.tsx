@@ -1,5 +1,5 @@
 import { webSocketConnection, type Connection } from '@axonivy/jsonrpc';
-import { App, ClientContextProvider, initQueryClient, QueryProvider } from '@axonivy/rule-editor';
+import { App, ClientContextProvider, initQueryClient, QueryProvider, RuleClientJsonRpc } from '@axonivy/rule-editor';
 import { Flex, HotkeysProvider, ReadonlyProvider, Spinner, ThemeProvider, toast, Toaster } from '@axonivy/ui-components';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
