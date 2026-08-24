@@ -22,8 +22,30 @@ export interface RuleSaveDataArgs {
 }
 
 export interface RuleData {
-  [key: string]: unknown;
+  name: string;
+  description: string;
+  matchMode: 'FIRST' | 'ALL';
+  data: string;
+  decisions: Rule[];
 }
+
+export interface Rule {
+  name: string;
+  when: Condition[];
+  then: Action[];
+}
+
+export interface Condition {
+  field: string;
+  operator: string; // Could be enum
+  value: string;
+}
+
+export interface Action {
+  field: string;
+  value: string;
+}
+
 
 export interface RuleActionArgs {
   actionId: 'openUrl';
