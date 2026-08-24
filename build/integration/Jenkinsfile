@@ -20,8 +20,8 @@ pipeline {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node-webtest', '-f build/Dockerfile.playwright .').inside {
-              sh 'pnpm run update:axonivy:next'
-              sh 'pnpm install --no-frozen-lockfile && pnpm run package'
+              sh 'pnpm install && pnpm run update:axonivy:next'
+              sh 'pnpm run package'
               dir ('playwright/rule-test-project') {
                 maven cmd: "-ntp verify -Dengine.page.url=${params.engineSource} -Dwebtest.cmd=webtest:${browser()}"
               }
@@ -45,14 +45,14 @@ pipeline {
             docker.build('node', '-f build/Dockerfile.node .').inside {
               def branchName = env.BRANCH_NAME.replace("/", "%252F")
               sh '''
-                pnpm install --no-frozen-lockfile
+                pnpm install
                 pnpm run protocol clean
 
                 artifacts="https://jenkins.ivyteam.io/job/core_json-schema/job/'''+branchName+'''/lastSuccessfulBuild/artifact"
-                devSchema="${artifacts}/workspace/ch.ivyteam.ivy.dialog.form.lsp.schema/target/schema/form/*/rule-tsgen.json/*zip*/schema.zip"
+                devSchema="${artifacts}/build/schema/target/editor-ts/*/rules-tsgen.json/*zip*/schema.zip"
                 curl -o schema.zip ${devSchema}
                 unzip -j schema.zip
-                mv $PWD/rule-tsgen.json $PWD/rules.json
+                mv $PWD/rules-tsgen.json $PWD/rules.json
                 pnpm run protocol generate $PWD/rules.json
                 pnpm run build && pnpm run lint:ci
               '''

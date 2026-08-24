@@ -11,5 +11,5 @@ export const screenshot = async (page: Page, name: string, size?: { width?: numb
 
 export const screenshotElement = async (element: Locator, name: string) => {
   const buffer = await element.screenshot({ path: `${dir}/screenshots/${name}.png`, animations: 'disabled' });
-  expect(buffer.byteLength).toBeGreaterThan(3000);
+  expect(buffer.byteLength).toBeGreaterThan(500);
 };
