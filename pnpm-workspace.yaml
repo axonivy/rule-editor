@@ -1,0 +1,10 @@
+packages:
+  - packages/*
+  - integrations/*
+  - playwright
+allowBuilds:
+  '@swc/core': false
+  esbuild: false
+preferWorkspacePackages: true
+publicHoistPattern:
+  - eslint

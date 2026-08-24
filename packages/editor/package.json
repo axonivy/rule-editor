@@ -1,0 +1,66 @@
+{
+  "name": "@axonivy/rule-editor",
+  "version": "14.0.0-next",
+  "private": false,
+  "license": "Apache-2.0",
+  "author": "Axon Ivy AG",
+  "homepage": "https://developer.axonivy.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axonivy/rule-editor"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@axonivy/rule-editor-protocol": "workspace:~"
+  },
+  "peerDependencies": {
+    "@axonivy/jsonrpc": "~14.0.0-next",
+    "@axonivy/ui-components": "~14.0.0-next",
+    "@axonivy/ui-icons": "~14.0.0-next",
+    "@tanstack/react-query": "^5.64",
+    "@tanstack/react-query-devtools": "^5.64",
+    "i18next": "^25.0.0 || ^26.0.0",
+    "react": "^19.0",
+    "react-i18next": "^16.0.0 || ^17.0.0"
+  },
+  "devDependencies": {
+    "@axonivy/jsonrpc": "next-14.0.0",
+    "@axonivy/ui-components": "next-14.0.0",
+    "@axonivy/ui-icons": "next-14.0.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/react-table": "^8.21.3",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.18",
+    "@vanilla-extract/recipes": "^0.5.7",
+    "@vitejs/plugin-react": "^6.0.5",
+    "i18next-cli": "^1.67.3",
+    "jsdom": "^30.0.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.0",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.10"
+  },
+  "type": "module",
+  "module": "lib/editor.js",
+  "types": "lib/index.d.ts",
+  "main": "lib/editor.js",
+  "scripts": {
+    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc --build",
+    "package": "pnpm run clean && vite build && tsc -p tsconfig.production.json",
+    "build:clean": "pnpm run clean && pnpm run build",
+    "type": "tsc --noEmit",
+    "test": "vitest",
+    "test:ci": "vitest --watch=false",
+    "i18n": "i18next-cli extract",
+    "i18n:ci": "i18next-cli extract --ci --dry-run"
+  }
+}

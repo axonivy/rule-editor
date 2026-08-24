@@ -1,0 +1,57 @@
+{
+  "name": "@axonivy/rule-editor-standalone",
+  "version": "14.0.0-next",
+  "private": true,
+  "author": "Axon Ivy AG",
+  "homepage": "https://developer.axonivy.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axonivy/rule-editor"
+  },
+  "dependencies": {
+ "@axonivy/jsonrpc": "next-14.0.0",
+    "@axonivy/rule-editor": "workspace:~",
+    "@axonivy/rule-editor-protocol": "workspace:~",
+    "@axonivy/ui-components": "next-14.0.0",
+    "@axonivy/ui-icons": "next-14.0.0",
+    "@tanstack/react-query": "^5.101.4",
+    "@tanstack/react-query-devtools": "^5.101.4",
+    "i18next": "^26.3.6",
+    "i18next-browser-languagedetector": "^8.2.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-i18next": "^17.0.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "@vitejs/plugin-react": "^6.0.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vite": "^8.2.0"
+  },
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "tsc --build",
+    "build:clean": "pnpm run clean && pnpm run build",
+    "package": "vite build",
+    "type": "tsc --noEmit",
+    "dev": "vite",
+    "serve": "vite preview"
+  },
+  "type": "module",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

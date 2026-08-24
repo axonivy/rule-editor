@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "name": "@axonivy/rule-editor-root",
+  "engines": {
+    "node": ">=24.11"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "check": "pnpm run type && pnpm run lint:ci && pnpm run test:ci && pnpm run i18n:ci",
+    "clean": "pnpm run -r clean",
+    "build": "tsc --build",
+    "package": "pnpm run -r package",
+    "build:clean": "pnpm run -r build:clean",
+    "type": "pnpm run -r type",
+    "lint": "eslint",
+    "lint:ci": "eslint -o eslint.xml -f checkstyle",
+    "lint:fix": "eslint --fix",
+    "lint:inspect": "eslint --inspect-config",
+    "i18n": "pnpm run -r i18n",
+    "i18n:ci": "pnpm run -r i18n:ci",
+    "protocol": "pnpm run --filter @axonivy/rule-editor-protocol",
+    "dev": "pnpm run --filter @axonivy/rule-editor-standalone dev",
+    "test": "pnpm run --filter @axonivy/rule-editor test",
+    "test:ci": "pnpm run -r test:ci",
+    "webtest": "pnpm run -r webtest",
+    "update:axonivy:next": "pnpm update -r @axonivy",
+    "raise:version": "lerna version --no-git-tag-version --no-push --ignore-scripts --exact --yes",
+    "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next-14.0.0 --no-git-tag-version --no-push --ignore-scripts --yes"
+  },
+  "devDependencies": {
+    "@axonivy/eslint-config": "next-14.0.0",
+    "@axonivy/prettier-config": "next-14.0.0",
+    "@axonivy/ts-config": "next-14.0.0",
+    "@lerna-lite/cli": "^5.4.2",
+    "@lerna-lite/publish": "^5.4.2",
+    "@lerna-lite/version": "^5.4.2",
+    "@types/node": "^24.13.3",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "rimraf": "^6.1.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
+  },
+  "prettier": "@axonivy/prettier-config"
+}
