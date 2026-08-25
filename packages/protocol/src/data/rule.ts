@@ -13,10 +13,15 @@ export interface EditorFileContent {
 export interface RuleContext {
   app: string;
   file: string;
-  pmv: string;
+  project: string;
 }
 
 export interface RuleSaveDataArgs {
+  context: RuleContext;
+  data: RuleData;
+}
+
+export interface RuleEditorData {
   context: RuleContext;
   data: RuleData;
 }
@@ -25,12 +30,13 @@ export interface RuleData {
   name: string;
   description: string;
   matchMode: 'FIRST' | 'ALL';
-  data: string;
+  data: object[];
   decisions: Rule[];
 }
 
 export interface Rule {
   name: string;
+  description: string;
   when: Condition[];
   then: Action[];
 }
@@ -45,7 +51,6 @@ export interface Action {
   field: string;
   value: string;
 }
-
 
 export interface RuleActionArgs {
   actionId: 'openUrl';

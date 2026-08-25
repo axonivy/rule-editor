@@ -35,7 +35,7 @@ export async function start() {
 
   const initialize = async (connection: Connection) => {
     const client = await RuleClientJsonRpc.startClient(connection);
-    client.initialize({ app, pmv, file });
+    client.initialize({ app, project: pmv, file });
     root.render(
       <React.StrictMode>
         <ThemeProvider defaultTheme={theme}>
@@ -43,7 +43,7 @@ export async function start() {
             <QueryProvider client={queryClient}>
               <ReadonlyProvider readonly={readonly}>
                 <HotkeysProvider initiallyActiveScopes={['global']}>
-                  <App context={{ app, pmv, file }} directSave={directSave} />
+                  <App context={{ app, project: pmv, file }} directSave={directSave} />
                 </HotkeysProvider>
               </ReadonlyProvider>
             </QueryProvider>

@@ -32,7 +32,7 @@ export const AppContext = createContext<AppContext>({
   data: {},
   setData: data => data,
   setSelectedElement: () => {},
-  context: { app: '', pmv: '', file: '' },
+  context: { app: '', project: '', file: '' },
   history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
   validations: [],
   helpUrl: ''
