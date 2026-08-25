@@ -4,5 +4,5 @@ import { screenshotElement } from './screenshot-util';
 
 test('editor', async ({ page }) => {
   await RuleEditor.openMock(page);
-  await screenshotElement(page.getByText('rule editor'), 'dialog-create-from-data');
+  await screenshotElement(page.getByText('DECISIONS'), 'rule-editor');
 });

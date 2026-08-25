@@ -13,7 +13,7 @@ import type {
   RuleActionArgs,
   RuleClient,
   RuleContext,
-  RuleData,
+  RuleEditorData,
   RuleMetaRequestTypes,
   RuleNotificationTypes,
   RuleOnNotificationTypes,
@@ -44,7 +44,7 @@ export class RuleClientJsonRpc extends BaseRpcClient implements RuleClient {
     return this.sendRequest('initialize', { ...context });
   }
 
-  data(context: RuleContext): Promise<RuleData> {
+  data(context: RuleContext): Promise<RuleEditorData> {
     return this.sendRequest('data', { ...context });
   }
 

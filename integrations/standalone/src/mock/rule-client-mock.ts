@@ -3,17 +3,31 @@ import type {
   EditorFileContent,
   RuleActionArgs,
   RuleClient,
-  RuleData,
   RuleMetaRequestTypes,
-  ValidationResult
+  ValidationResult,
+  RuleSaveData
 } from '@axonivy/rule-editor-protocol';
-import type { RuleSaveData } from '@axonivy/rule-editor-protocol/src/data/rule-data';
+import type { RuleEditorData } from '@axonivy/rule-editor-protocol';
+import { mockData, mockDecisions } from './data-mock';
 import { validateMock } from './validation-mock';
 
 export class RuleClientMock implements RuleClient {
-  private ruleData: RuleData;
+  private ruleEditorData: RuleEditorData;
   constructor() {
-    this.ruleData = {};
+    this.ruleEditorData = {
+      context: {
+        app: 'mockApp',
+        file: 'mockFile',
+        project: 'mockProject'
+      },
+      data: {
+        name: 'Mock Rule',
+        description: 'This is a mock rule for testing purposes.',
+        matchMode: 'FIRST',
+        data: mockData,
+        decisions: mockDecisions
+      }
+    };
   }
 
   protected onValidationChangedEmitter = new Emitter<void>();
@@ -25,17 +39,17 @@ export class RuleClientMock implements RuleClient {
     return Promise.resolve();
   }
 
-  data(): Promise<RuleData> {
-    return Promise.resolve(this.ruleData);
+  data(): Promise<RuleEditorData> {
+    return Promise.resolve(this.ruleEditorData);
   }
 
   saveData(saveData: RuleSaveData): Promise<EditorFileContent> {
-    this.ruleData = saveData.data;
+    this.ruleEditorData.data = saveData.data;
     return Promise.resolve({ content: '' });
   }
 
   validate(): Promise<ValidationResult[]> {
-    return Promise.resolve(validateMock(this.ruleData));
+    return Promise.resolve(validateMock(this.ruleEditorData.data));
   }
 
   meta<TMeta extends keyof RuleMetaRequestTypes>(

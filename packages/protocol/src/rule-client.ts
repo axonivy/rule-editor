@@ -1,5 +1,4 @@
-import type { EditorFileContent, RuleActionArgs, RuleContext, RuleData, ValidationResult } from './data/rule';
-import type { RuleSaveData } from './data/rule-data';
+import type { EditorFileContent, RuleActionArgs, RuleContext, RuleEditorData, ValidationResult, RuleSaveData } from './data/rule';
 import type { RuleMetaRequestTypes } from './rule-protocol';
 
 export interface Event<T> {
@@ -13,7 +12,7 @@ export interface Disposable {
 
 export interface RuleClient {
   initialize(context: RuleContext): Promise<void>;
-  data(context: RuleContext): Promise<RuleData>;
+  data(context: RuleContext): Promise<RuleEditorData>;
   saveData(saveData: RuleSaveData): Promise<EditorFileContent>;
 
   validate(context: RuleContext): Promise<ValidationResult[]>;

@@ -1,3 +1,10 @@
 {
-  "label": "regel editor"
+  "common": {
+    "message": {
+      "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
+    }
+  },
+  "message": {
+    "notFound": "Nicht gefunden"
+  }
 }
