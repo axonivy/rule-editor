@@ -18,24 +18,24 @@ export const useUiState = () => {
 };
 
 export type AppContext = {
-  data: RuleData;
-  setData: UpdateConsumer<RuleData>;
-  selectedElement?: string;
-  setSelectedElement: (element?: string) => void;
+  data?: RuleData;
   context: RuleContext;
-  history: ReturnType<typeof useHistoryData<RuleData>>;
-  validations: Array<ValidationResult>;
-  helpUrl: string;
+  // setData: UpdateConsumer<RuleData>;
+  // selectedElement?: string;
+  // setSelectedElement: (element?: string) => void;
+  // history: ReturnType<typeof useHistoryData<RuleData>>;
+  // validations: Array<ValidationResult>;
+  // helpUrl: string;
 };
 
 export const AppContext = createContext<AppContext>({
-  data: {},
-  setData: data => data,
-  setSelectedElement: () => {},
-  context: { app: '', project: '', file: '' },
-  history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
-  validations: [],
-  helpUrl: ''
+  data: undefined,
+  context: { app: '', project: '', file: '' }
+  // setData: data => data,
+  // setSelectedElement: () => {},
+  // history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
+  // validations: [],
+  // helpUrl: ''
 });
 
 export const AppProvider = AppContext.Provider;

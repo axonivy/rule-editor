@@ -36,10 +36,10 @@ export interface RuleData {
   description: string;
   matchMode: 'FIRST' | 'ALL';
   data: object[];
-  decisions: Rule[];
+  decisions: Decision[];
 }
 
-export interface Rule {
+export interface Decision {
   name: string;
   description: string;
   when: Condition[];

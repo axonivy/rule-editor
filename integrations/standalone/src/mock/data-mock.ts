@@ -1,7 +1,7 @@
-import type { Rule } from '@axonivy/rule-editor-protocol';
+import type { Decision } from '@axonivy/rule-editor-protocol';
 export const mockData = [{ salaryYear: 50_000, getsBenefits: false }];
 
-export const mockDecisions: Rule[] = [
+export const mockDecisions: Decision[] = [
   {
     name: 'Benefits by salary',
     description: 'If salary is below 60k, then you get benefits',
