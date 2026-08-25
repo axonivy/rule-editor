@@ -1,63 +1,58 @@
-import { BasicField, Flex, Table, TableBody, SelectRow, TableCell, useTableGlobalFilter, useTableSort } from '@axonivy/ui-components';
+import {
+  BasicField,
+  dataTableHelper,
+  Flex,
+  SelectRow,
+  SortableHeader,
+  Table,
+  TableBody,
+  TableCell,
+  TableGlobalFilter,
+  TableResizableHeader
+} from '@axonivy/ui-components';
 
-import { useAppContext } from '../../context/AppContext';
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
 import { type Decision } from '@axonivy/rule-editor-protocol';
+import { flexRender, useTable } from '@tanstack/react-table';
+import { useAppContext } from '../../context/AppContext';
+
+const { columnHelper, tableOptions } = dataTableHelper<Decision>();
 
 export const Main = () => {
   const { data } = useAppContext();
   const decisions = data?.decisions ?? [];
 
-  //   const selection = useTableSelect<Decision>({
-  //     onSelect: selectedRows => {
-  //       const selectedRowIndex = Object.keys(selectedRows).find(key => selectedRows[key]);
-  //       if (selectedRowIndex === undefined) {
-  //         setSelectedIndex(-1);
-  //         return;
-  //       }
-  //       setSelectedIndex(Number(selectedRowIndex));
-  //     }
-  //   });
-  const globalFilter = useTableGlobalFilter();
-  const sort = useTableSort();
-  const columns: ColumnDef<Decision, string>[] = [
-    {
-      accessorKey: 'name',
-      header: () => <span>NAME</span>,
+  const columns = columnHelper.columns([
+    columnHelper.accessor('name', {
+      header: ({ column }) => <SortableHeader column={column} name='NAME' />,
       cell: cell => (
         <Flex alignItems='center' gap={1}>
           <span>{cell.getValue()}</span>
         </Flex>
       )
-      //   cell: ({ row }) => <div>{row.getValue('name')}</div>
-    }
-    // {
-    //   accessorKey: 'description',
-    //   header: ({ column }) => <SortableHeader column={column} name='DECISION DESCRIPTION' />,
-    //   cell: cell => <span>{cell.getValue()}</span>
-    // },
-    // {
-    //   accessorKey: 'description',
-    //   header: ({ column }) => <SortableHeader column={column} name='' />,
-    //   cell: cell => <span>{cell.getValue()}</span>
-    // },
-    // {}
-  ];
+    }),
+    columnHelper.accessor('description', {
+      header: ({ column }) => <SortableHeader column={column} name='DESCRIPTION' />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          <span>{cell.getValue()}</span>
+        </Flex>
+      )
+    })
+  ]);
 
-  const table = useReactTable<Decision>({
-    ...globalFilter.options,
-    ...sort.options,
+  const table = useTable<Decision>({
+    ...tableOptions,
     data: decisions,
-    columns: columns,
-    getCoreRowModel: getCoreRowModel()
+    columns
   });
 
   return (
     <Flex direction='column' className='h-full overflow-auto'>
-      <BasicField tabIndex={-1} className='m-3 min-h-0' label={'Decisions'} onClick={event => event.stopPropagation()}>
-        {globalFilter.filter}
+      <BasicField tabIndex={-1} className='m-3 min-h-0' label={'DECISIONS'} onClick={event => event.stopPropagation()}>
+        <TableGlobalFilter table={table} />
         <div className='overflow-x-hidden'>
           <Table>
+            <TableResizableHeader headerGroups={table.getHeaderGroups()} />
             <TableBody>
               {table.getRowModel().rows.map(row => (
                 <SelectRow key={row.id} row={row}>

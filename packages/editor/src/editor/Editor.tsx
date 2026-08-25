@@ -1,26 +1,13 @@
-// import { AppProvider } from '../context/AppContext';
-
-import {
-  Flex,
-  PanelMessage,
-  ResizableGroup,
-  ResizableHandle,
-  ResizablePanel,
-  Spinner,
-  useDefaultLayout,
-  useHistoryData,
-  useHotkeys,
-  type Unary
-} from '@axonivy/ui-components';
+import { Flex, PanelMessage, ResizableGroup, ResizablePanel, Spinner } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 
-import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
 import { type RuleContext } from '@axonivy/rule-editor-protocol';
-import { useClient } from '../context/ClientContext';
+import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { genQueryKey } from '../query/query-client';
+import { useTranslation } from 'react-i18next';
 import { AppProvider } from '../context/AppContext';
+import { useClient } from '../context/ClientContext';
+import { genQueryKey } from '../query/query-client';
 import { Main } from './main/Main';
 
 export type RuleEditorProps = {
