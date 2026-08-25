@@ -40,7 +40,7 @@ export const Main = () => {
     })
   ]);
 
-  const table = useTable<Decision>({
+  const table = useTable({
     ...tableOptions,
     data: decisions,
     columns
