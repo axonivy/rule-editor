@@ -1,5 +1,4 @@
-import type { EditorFileContent, RuleActionArgs, RuleContext, RuleEditorData, ValidationResult, RuleSaveData } from './data/rule';
-import type { RuleMetaRequestTypes } from './rule-protocol';
+import type { EditorFileContent, RuleContext, RuleEditorData, RuleSaveDataArgs } from './data/rule';
 
 export interface Event<T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,16 +12,7 @@ export interface Disposable {
 export interface RuleClient {
   initialize(context: RuleContext): Promise<void>;
   data(context: RuleContext): Promise<RuleEditorData>;
-  saveData(saveData: RuleSaveData): Promise<EditorFileContent>;
-
-  validate(context: RuleContext): Promise<ValidationResult[]>;
-
-  meta<TMeta extends keyof RuleMetaRequestTypes>(
-    path: TMeta,
-    args: RuleMetaRequestTypes[TMeta][0]
-  ): Promise<RuleMetaRequestTypes[TMeta][1]>;
-
-  action(action: RuleActionArgs): void;
+  saveData(saveData: RuleSaveDataArgs): Promise<EditorFileContent>;
 
   onDataChanged: Event<void>;
   onValidationChanged: Event<void>;

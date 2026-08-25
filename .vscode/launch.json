@@ -8,8 +8,8 @@
       "name": "Launch Standalone (Chrome)",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000/?server=localhost:8081&app=designer&pmv=rule-test-project&file=rules.yaml&directSave",
-      "presentation": {
+      "url": "http://localhost:3000/?server=localhost:8080/~Developer-rule-test-project&app=Developer-rule-test-project&project=rule-test-project&file=rule/test/DiscountCalc.r.json&directSave",
+     "presentation": {
         "group": "4. Standalone",
         "order": 1
       },

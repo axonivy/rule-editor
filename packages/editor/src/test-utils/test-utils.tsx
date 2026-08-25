@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { type RuleContext, type RuleData, type RuleMetaRequestTypes, type ValidationResult } from '@axonivy/rule-editor-protocol';
-import { type useHistoryData } from '@axonivy/ui-components';
+import { type RuleContext, type RuleConfig } from '@axonivy/rule-editor-protocol';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, type RenderHookOptions } from '@testing-library/react';
 import i18n from 'i18next';
-import { type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import { type ReactNode } from 'react';
 import { initReactI18next } from 'react-i18next';
 import { AppProvider } from '../context/AppContext';
 import { ClientContextProvider, type ClientContext } from '../context/ClientContext';
@@ -13,13 +12,8 @@ import enMessages from '../translation/rule-editor/en.json';
 type ContextHelperProps = {
   appContext?: {
     context?: RuleContext;
-    data?: RuleData;
-    setData?: (data: RuleData) => void;
-    selectedElement?: string;
-    setSelectedElement?: Dispatch<SetStateAction<string | undefined>>;
-    history?: ReturnType<typeof useHistoryData<RuleData>>;
-    validations?: Array<ValidationResult>;
-    helpUrl?: string;
+    data?: RuleConfig;
+    setData?: (data: RuleConfig) => void;
   };
 };
 
@@ -37,17 +31,10 @@ const initTranslation = () => {
 };
 
 const ContextHelper = ({ appContext, children }: ContextHelperProps & { children: ReactNode }) => {
-  const data = appContext?.data ?? ({} as RuleData);
+  const data = appContext?.data ?? ({} as RuleConfig);
   const client: ClientContext = {
     // @ts-ignore
-    client: {
-      meta<TMeta extends keyof RuleMetaRequestTypes>(path: TMeta): Promise<RuleMetaRequestTypes[TMeta][1]> {
-        switch (path) {
-          default:
-            throw Error('mock meta path not programmed');
-        }
-      }
-    }
+    client: {}
   };
   const queryClient = new QueryClient();
   initTranslation();
@@ -59,12 +46,7 @@ const ContextHelper = ({ appContext, children }: ContextHelperProps & { children
             context: appContext?.context ?? ({ file: '' } as RuleContext),
             data,
             // @ts-ignore
-            setData: appContext?.setData ? getData => appContext.setData(getData(data)) : () => {},
-            selectedElement: appContext?.selectedElement,
-            setSelectedElement: appContext?.setSelectedElement ?? (() => {}),
-            history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
-            validations: [],
-            helpUrl: appContext?.helpUrl ?? ''
+            setData: appContext?.setData ? getData => appContext.setData(getData(data)) : () => {}
           }}
         >
           {children}
