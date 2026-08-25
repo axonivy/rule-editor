@@ -1,9 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { type RuleContext, type RuleData, type ValidationResult } from '@axonivy/rule-editor-protocol';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type RuleContext, type RuleData } from '@axonivy/rule-editor-protocol';
+
 import { useReadonly, type useHistoryData } from '@axonivy/ui-components';
 import { createContext, use, useState } from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import type { UpdateConsumer } from '../types/types';
 
 export type UI = {
@@ -23,22 +22,27 @@ export const useUiState = () => {
 export type AppContext = {
   data?: RuleData;
   context: RuleContext;
-  // setData: UpdateConsumer<RuleData>;
-  // selectedElement?: string;
-  // setSelectedElement: (element?: string) => void;
-  // history: ReturnType<typeof useHistoryData<RuleData>>;
+  setData: UpdateConsumer<RuleData>;
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
+  history: ReturnType<typeof useHistoryData<RuleData>>;
   // validations: Array<ValidationResult>;
-  // helpUrl: string;
+  detail: boolean;
+  setDetail: (visible: boolean) => void;
+  helpUrl: string;
 };
 
 export const AppContext = createContext<AppContext>({
   data: undefined,
-  context: { app: '', project: '', file: '' }
-  // setData: data => data,
-  // setSelectedElement: () => {},
-  // history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
+  context: { app: '', project: '', file: '' },
+  setData: data => data,
+  selectedIndex: -1,
+  setSelectedIndex: () => {},
+  history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
   // validations: [],
-  // helpUrl: ''
+  detail: true,
+  setDetail: () => {},
+  helpUrl: ''
 });
 
 export const AppProvider = AppContext.Provider;

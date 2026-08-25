@@ -1,12 +1,25 @@
-import { type RuleContext } from '@axonivy/rule-editor-protocol';
-import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import {
+  Flex,
+  Spinner,
+  PanelMessage,
+  ResizableGroup,
+  ResizablePanel,
+  useDefaultLayout,
+  useHistoryData,
+  useHotkeys,
+  type Unary
+} from '@axonivy/ui-components';
+
+import { type RuleContext, type Decision, type RuleData, type RuleEditorData } from '@axonivy/rule-editor-protocol';
+import { AppProvider } from '../context/AppContext';
 import { useClient } from '../context/ClientContext';
 import { genQueryKey } from '../query/query-client';
-import { Flex, Spinner, PanelMessage, ResizableGroup, ResizablePanel } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { AppProvider } from '../context/AppContext';
+import { useKnownHotkeys } from '../utils/useKnownHotkeys';
 import { Main } from './main/Main';
 
 export type RuleEditorProps = {
@@ -14,10 +27,16 @@ export type RuleEditorProps = {
   directSave?: boolean;
 };
 
-export const Editor = ({ context }: RuleEditorProps) => {
+export const Editor = ({ context, directSave }: RuleEditorProps) => {
   const { t } = useTranslation();
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [detail, setDetail] = useState(true);
+  const [initialData, setInitialData] = useState<Array<Decision> | undefined>(undefined);
+  const history = useHistoryData<RuleData>();
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'role-editor-resize', storage: localStorage });
 
   const client = useClient();
+  const queryClient = useQueryClient();
 
   const queryKeys = useMemo(
     () => ({
@@ -35,6 +54,48 @@ export const Editor = ({ context }: RuleEditorProps) => {
     structuralSharing: false
   });
 
+  useEffect(() => {
+    const dataDispose = client.onDataChanged(() => queryClient.invalidateQueries({ queryKey: queryKeys.data(context) }));
+    return () => {
+      dataDispose.dispose();
+    };
+  }, [client, context, queryClient, queryKeys]);
+
+  if (data?.data !== undefined && initialData === undefined) {
+    setInitialData(data.data.decisions);
+    history.push(data.data);
+  }
+
+  const mutation = useMutation({
+    mutationKey: queryKeys.saveData(context),
+    mutationFn: async (updateData: Unary<RuleData>) => {
+      const saveData = queryClient.setQueryData<RuleEditorData>(queryKeys.data(context), prevData => {
+        if (prevData) {
+          return { ...prevData, data: updateData(prevData.data) };
+        }
+        return undefined;
+      });
+      if (saveData) {
+        return client.saveData({ context, data: saveData.data, directSave: directSave ?? false });
+      }
+      return Promise.resolve();
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.validation(context) })
+  });
+
+  const detailRef = useRef<HTMLDivElement>(null);
+  const hotkeys = useKnownHotkeys();
+  useHotkeys(
+    hotkeys.focusInscription.hotkey,
+    () => {
+      setDetail(true);
+      detailRef.current?.focus();
+    },
+    {
+      scopes: ['global']
+    }
+  );
+
   if (isPending) {
     return (
       <Flex alignItems='center' justifyContent='center' className='size-full'>
@@ -49,16 +110,21 @@ export const Editor = ({ context }: RuleEditorProps) => {
     return <PanelMessage icon={IvyIcons.ErrorXMark} message={t('message.notFound')} />;
   }
 
-  // <h1>TEST</h1>;
-
   return (
     <AppProvider
       value={{
         data: data.data,
-        context: data.context
+        context: data.context,
+        setData: mutation.mutate,
+        selectedIndex,
+        setSelectedIndex,
+        history,
+        detail,
+        setDetail,
+        helpUrl: data.helpUrl
       }}
     >
-      <ResizableGroup orientation='horizontal'>
+      <ResizableGroup orientation='horizontal' defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>
         <ResizablePanel id='rule-editor-main' defaultSize='50%' minSize='30%' className='bg-n75'>
           <Flex direction='column' className='h-full'>
             <Main />

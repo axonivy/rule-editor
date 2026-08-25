@@ -29,6 +29,7 @@ export type RuleSaveData = Omit<RuleSaveDataArgs, 'data'> & {
 export interface RuleEditorData {
   context: RuleContext;
   data: RuleData;
+  helpUrl: string;
 }
 
 export interface RuleData {

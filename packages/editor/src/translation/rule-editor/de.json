@@ -2,9 +2,24 @@
   "common": {
     "message": {
       "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
+    },
+    "hotkey": {
+      "focusInscription": "Fokus Detailansicht ({{hotkey}})",
+      "focusMain": "Fokus Hauptansicht ({{hotkey}})",
+      "focusToolbar": "Fokus Toolbar ({{hotkey}})",
+      "help": "Hilfe öffnen ({{hotkey}})",
+      "redo": "Wiederholen ({{hotkey}})",
+      "undo": "Rückgängig ({{hotkey}})"
     }
   },
   "message": {
     "notFound": "Nicht gefunden"
+  },
+  "label": {
+    "editorTitle": "Rule Editor"
+  },
+  "hotkey": {
+    "addRule": "Rolle hinzufügen ({{hotkey}})",
+    "deleteRule": "Rolle löschen ({{hotkey}})"
   }
 }
