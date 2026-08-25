@@ -1,5 +1,4 @@
-import type { EditorFileContent, RuleActionArgs, RuleContext, RuleEditorData, ValidationResult } from './data/rule';
-import type { RuleSaveData } from './data/rule-data';
+import type { EditorFileContent, RuleActionArgs, RuleContext, RuleEditorData, ValidationResult, RuleSaveData } from './data/rule';
 import type { RuleMetaRequestTypes } from './rule-protocol';
 
 export interface Event<T> {

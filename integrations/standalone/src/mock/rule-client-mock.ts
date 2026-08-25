@@ -1,6 +1,12 @@
 import { Emitter } from '@axonivy/jsonrpc';
-import type { EditorFileContent, RuleActionArgs, RuleClient, RuleMetaRequestTypes, ValidationResult } from '@axonivy/rule-editor-protocol';
-import type { RuleSaveData } from '@axonivy/rule-editor-protocol/src/data/rule-data';
+import type {
+  EditorFileContent,
+  RuleActionArgs,
+  RuleClient,
+  RuleMetaRequestTypes,
+  ValidationResult,
+  RuleSaveData
+} from '@axonivy/rule-editor-protocol';
 import type { RuleEditorData } from '@axonivy/rule-editor-protocol';
 import { mockData, mockDecisions } from './data-mock';
 import { validateMock } from './validation-mock';

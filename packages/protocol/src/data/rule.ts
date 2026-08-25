@@ -21,6 +21,11 @@ export interface RuleSaveDataArgs {
   data: RuleData;
 }
 
+export type RuleSaveData = Omit<RuleSaveDataArgs, 'data'> & {
+  data: RuleData;
+  directSave?: boolean;
+};
+
 export interface RuleEditorData {
   context: RuleContext;
   data: RuleData;
