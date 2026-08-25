@@ -1,6 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { type RuleContext, type RuleData, type ValidationResult } from '@axonivy/rule-editor-protocol';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useReadonly, type useHistoryData } from '@axonivy/ui-components';
 import { createContext, use, useState } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { UpdateConsumer } from '../types/types';
 
 export type UI = {
