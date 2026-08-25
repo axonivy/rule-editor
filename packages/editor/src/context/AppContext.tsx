@@ -29,7 +29,13 @@ export type AppContext = {
 };
 
 export const AppContext = createContext<AppContext>({
-  data: {},
+  data: {
+    name: '',
+    description: '',
+    matchMode: 'FIRST',
+    data: '',
+    decisions: []
+  },
   setData: data => data,
   setSelectedElement: () => {},
   context: { app: '', pmv: '', file: '' },

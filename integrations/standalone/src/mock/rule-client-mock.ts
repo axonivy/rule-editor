@@ -13,7 +13,51 @@ import { validateMock } from './validation-mock';
 export class RuleClientMock implements RuleClient {
   private ruleData: RuleData;
   constructor() {
-    this.ruleData = {};
+    this.ruleData = {
+      name: 'Customer Validation',
+      description: 'Test rule for validating customer data.',
+      matchMode: 'FIRST',
+      data: 'test-data',
+      decisions: [
+        {
+          name: 'Valid Customer',
+          when: [
+            {
+              field: 'customer.status',
+              operator: 'EQUALS',
+              value: 'ACTIVE'
+            },
+            {
+              field: 'customer.age',
+              operator: 'GREATER_THAN',
+              value: '18'
+            }
+          ],
+          then: [
+            {
+              field: 'result',
+              value: 'VALID'
+            }
+          ]
+        },
+        {
+          name: 'Invalid Customer',
+          when: [
+            {
+              field: 'customer.status',
+              operator: 'NOT_EQUALS',
+              value: 'ACTIVE'
+            }
+          ],
+          then: [
+            {
+              field: 'result',
+              value: 'INVALID'
+            }
+          ]
+        }
+      ]
+    };
   }
 
   protected onValidationChangedEmitter = new Emitter<void>();
