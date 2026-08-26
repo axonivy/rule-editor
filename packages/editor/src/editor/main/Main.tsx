@@ -108,7 +108,6 @@ export const Main = () => {
         tabIndex={-1}
         ref={firstElementRef}
         className='m-3 min-h-0'
-        label={t('label.editorTitle')}
         control={<Controls addRule={addRule} deleteRule={table.getSelectedRowModel().flatRows.length > 0 ? deleteRule : undefined} />}
         onClick={event => event.stopPropagation()}
       >
