@@ -34,7 +34,7 @@ export const Editor = ({ context }: RuleEditorProps) => {
 
   const [detail, setDetail] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const initialDataRef = useRef<RuleConfig | undefined>(undefined);
+  const [initialData, setInitialData] = useState<RuleConfig | undefined>(undefined);
   const history = useHistoryData<RuleConfig>();
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'rule-editor-resize', storage: localStorage });
 
@@ -62,12 +62,10 @@ export const Editor = ({ context }: RuleEditorProps) => {
     };
   }, [client, context, queryClient, queryKeys]);
 
-  useEffect(() => {
-    if (data?.data.config !== undefined && initialDataRef.current === undefined) {
-      initialDataRef.current = data.data.config;
-      history.push(data.data.config);
-    }
-  }, [data?.data.config, history]);
+  if (data?.data.config !== undefined && initialData === undefined) {
+    setInitialData(data.data.config);
+    history.push(data.data.config);
+  }
 
   const mutation = useMutation({
     mutationKey: queryKeys.saveData(context),
