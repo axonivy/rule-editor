@@ -4,7 +4,6 @@ import {
   dataTableHelper,
   deleteFirstSelectedRow,
   Flex,
-  selectRow,
   SelectRow,
   SortableHeader,
   Table,
@@ -101,7 +100,7 @@ export const Main = () => {
       direction='column'
       ref={ref}
       onClick={() => {
-        selectRow(table);
+        table.resetRowSelection();
       }}
       className='h-full overflow-auto'
     >
