@@ -2,7 +2,7 @@ import { Button, SidebarHeader, Tooltip, TooltipContent, TooltipProvider, Toolti
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
-// import { DetailContent } from './DetailContent';
+import { SidebarContent } from './SidebarContent';
 
 export const Sidebar = ({ ref }: { ref: React.Ref<HTMLDivElement> }) => {
   const { data, selectedIndex } = useAppContext();
@@ -23,7 +23,7 @@ export const Sidebar = ({ ref }: { ref: React.Ref<HTMLDivElement> }) => {
           </Tooltip>
         </TooltipProvider>
       </SidebarHeader>
-      {/* <DetailContent /> */}
+      <SidebarContent />
     </>
   );
 };

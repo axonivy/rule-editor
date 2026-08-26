@@ -9,7 +9,11 @@
       "undo": "Rückgängig ({{hotkey}})"
     },
     "label": {
-      "details": "Details"
+      "cancel": "Abbrechen",
+      "details": "Details",
+      "displayName": "Anzeigename",
+      "name": "Name",
+      "remove": "Entfernen"
     },
     "message": {
       "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
@@ -20,7 +24,8 @@
     "deleteRule": "Regel löschen ({{hotkey}})"
   },
   "label": {
-    "editorTitle": "Regel-Editor"
+    "editorTitle": "Regel-Editor",
+    "noRuleSelected": "Keine Regel ausgewählt"
   },
   "message": {
     "errorOnly": "Fehler: {{error}}",

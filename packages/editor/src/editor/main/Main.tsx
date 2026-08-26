@@ -34,6 +34,7 @@ export const Main = () => {
   const { data, setData, setSelectedIndex, detail, setDetail } = useAppContext();
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
+  // const decisions = data.decisions ?? [];
 
   const columns = useMemo(
     () =>

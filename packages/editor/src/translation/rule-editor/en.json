@@ -9,7 +9,11 @@
       "undo": "Undo ({{hotkey}})"
     },
     "label": {
-      "details": "Details"
+      "cancel": "Cancel",
+      "details": "Details",
+      "displayName": "Display Name",
+      "name": "Name",
+      "remove": "Remove"
     },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"
@@ -20,7 +24,8 @@
     "deleteRule": "Delete rule ({{hotkey}})"
   },
   "label": {
-    "editorTitle": "Rule Editor"
+    "editorTitle": "Rule Editor",
+    "noRuleSelected": "No Rule Selected"
   },
   "message": {
     "errorOnly": "Error: {{error}}",
