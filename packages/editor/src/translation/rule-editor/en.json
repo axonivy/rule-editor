@@ -27,6 +27,6 @@
     "notFound": "Not found"
   },
   "title": {
-    "main": "Roles - {{name}}"
+    "main": "Rules - {{name}}"
   }
 }

@@ -13,7 +13,8 @@ import {
   ResizablePanel,
   useHotkeys,
   useHistoryData,
-  useDefaultLayout
+  useDefaultLayout,
+  ResizableHandle
 } from '@axonivy/ui-components';
 import type { Unary } from '../types/types';
 import { IvyIcons } from '@axonivy/ui-icons';
@@ -35,7 +36,7 @@ export const Editor = ({ context }: RuleEditorProps) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const initialDataRef = useRef<RuleConfig | undefined>(undefined);
   const history = useHistoryData<RuleConfig>();
-  const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'role-editor-resize', storage: localStorage });
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'rule-editor-resize', storage: localStorage });
 
   const client = useClient();
   const queryClient = useQueryClient();
@@ -135,6 +136,17 @@ export const Editor = ({ context }: RuleEditorProps) => {
             </ErrorBoundary>
           </Flex>
         </ResizablePanel>
+        {detail && (
+          <>
+            <ResizableHandle />
+            <ResizablePanel id='rule-editor-detail' defaultSize='25%' minSize='20%'>
+              <Flex direction='column' className='h-full'>
+                <h1>TEST SIDEBAR</h1>
+                {/* <Sidebar ref={detailRef} /> */}
+              </Flex>
+            </ResizablePanel>
+          </>
+        )}
       </ResizableGroup>
     </AppProvider>
   );
