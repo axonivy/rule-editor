@@ -26,7 +26,8 @@ export class RuleClientMock implements RuleClient {
         matchMode: 'FIRST',
         data: mockData,
         decisions: mockDecisions
-      }
+      },
+      helpUrl: ''
     };
   }
 
