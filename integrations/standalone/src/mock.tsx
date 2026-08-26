@@ -19,7 +19,7 @@ export function start() {
   initTranslation();
   createRoot(root).render(
     <React.StrictMode>
-      <ThemeProvider defaultTheme='light'>
+      <ThemeProvider defaultTheme='dark'>
         <ClientContextProvider client={ruleClient}>
           <QueryProvider client={queryClient}>
             <ReadonlyProvider readonly={readonly}>
