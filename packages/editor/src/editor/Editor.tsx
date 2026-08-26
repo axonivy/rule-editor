@@ -21,6 +21,7 @@ import { AppProvider } from '../context/AppContext';
 import { Main } from './main/Main';
 import { ErrorFallback } from './main/ErrorFallback';
 import { useKnownHotkeys } from '../utils/useKnonwHotkeys';
+import { RuleToolbar } from './main/RuleToolbar';
 
 export type RuleEditorProps = {
   context: RuleContext;
@@ -126,6 +127,7 @@ export const Editor = ({ context }: RuleEditorProps) => {
       <ResizableGroup orientation='horizontal' defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>
         <ResizablePanel id='rule-editor-main' defaultSize='50%' minSize='30%' className='bg-n75'>
           <Flex direction='column' className='h-full'>
+            <RuleToolbar />
             <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[data]}>
               <Main />
               {/* {data.data.config.name} */}

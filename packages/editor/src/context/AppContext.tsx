@@ -45,15 +45,17 @@ export const AppContext = createContext<AppContext>({
 
 export const AppProvider = AppContext.Provider;
 
-export const useAppContext = (): AppContext => {
+export const useAppContext = (): AppContext & { setUnhistoriedVariables: UpdateConsumer<RuleConfig> } => {
   const context = use(AppContext);
   return {
     ...context,
     setData: updateData => {
       context.setData(old => {
         const newData = updateData(old);
+        context.history.push(newData);
         return newData;
       });
-    }
+    },
+    setUnhistoriedVariables: context.setData
   };
 };
