@@ -7,10 +7,8 @@ export const SidebarContent = () => {
   const { data, setData, selectedIndex } = useAppContext();
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
-  //   const decisions = data.decisions ?? [];
 
   const rule = useMemo(() => decisions[selectedIndex], [decisions, selectedIndex]);
-  //   const rule = decisions[selectedIndex];
 
   if (rule === undefined) {
     return <PanelMessage message={t('label.noRuleSelected')} />;
