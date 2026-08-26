@@ -1,8 +1,8 @@
-import { BasicField, Flex, Input, PanelMessage } from '@axonivy/ui-components';
+/* eslint-disable i18next/no-literal-string */
+import { BasicField, Collapsible, CollapsibleContent, CollapsibleTrigger, Flex, Input, PanelMessage } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
-import { ConditionSet } from './components/ConditionSet';
 export const SidebarContent = () => {
   const { t } = useTranslation();
   const { data, setData, selectedIndex } = useAppContext();
@@ -27,11 +27,25 @@ export const SidebarContent = () => {
   };
 
   return (
-    <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
-      <BasicField label={t('common.label.name')}>
-        <Input value={rule.name} onChange={event => updateName(event.target.value)} />
-      </BasicField>
-      <ConditionSet condition={rule.when[0] ?? { field: '', operator: '', value: '' }} />
+    <Flex direction='column' gap={4}>
+      <Collapsible defaultOpen={true}>
+        <CollapsibleTrigger>General</CollapsibleTrigger>
+        <CollapsibleContent>
+          <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
+            <BasicField label={t('common.label.name')}>
+              <Input value={rule.name} onChange={event => updateName(event.target.value)} />
+            </BasicField>
+          </Flex>
+        </CollapsibleContent>
+      </Collapsible>
+
+      <Collapsible>
+        <CollapsibleTrigger>If</CollapsibleTrigger>
+      </Collapsible>
+
+      <Collapsible>
+        <CollapsibleTrigger>Then</CollapsibleTrigger>
+      </Collapsible>
     </Flex>
   );
 };
