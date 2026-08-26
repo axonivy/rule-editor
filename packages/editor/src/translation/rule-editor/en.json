@@ -22,5 +22,9 @@
   "message": {
     "errorOnly": "Error: {{error}}",
     "notFound": "Not found"
+  },
+  "title": {
+    "detail": "Role",
+    "main": "Roles - {{name}}"
   }
 }
