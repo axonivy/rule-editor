@@ -31,7 +31,7 @@ export type AppContext = {
 };
 
 export const AppContext = createContext<AppContext>({
-  data: { data: '', description: '', desicions: [], matchMode: 'FIRST', name: '' },
+  data: { data: '', description: '', decisions: [], matchMode: 'FIRST', name: '' },
   context: { app: '', project: '', file: '' },
   setData: data => data
   // setSelectedElement: () => {},

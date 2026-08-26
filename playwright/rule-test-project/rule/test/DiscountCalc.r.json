@@ -5,7 +5,7 @@
     "matchMode": "FIRST",
     "data": "test.Member",
     "description": "Calculates a member discount based on member type and purchase amount.",
-    "desicions": [
+    "decisions": [
       {
         "name": "No discount",
         "when": [
