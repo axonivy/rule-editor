@@ -41,7 +41,7 @@ export const SidebarContent = () => {
   };
 
   return (
-    <Flex direction='column' gap={4}>
+    <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
       <Collapsible defaultOpen={true}>
         <CollapsibleTrigger>General</CollapsibleTrigger>
         <CollapsibleContent>
