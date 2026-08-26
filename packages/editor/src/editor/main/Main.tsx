@@ -21,12 +21,12 @@ import {
 } from '@axonivy/ui-components';
 
 import { type Decision } from '@axonivy/rule-editor-protocol';
-import { flexRender, useTable } from '@tanstack/react-table';
-import { useAppContext } from '../../context/AppContext';
-import { useMemo, useEffect, useRef } from 'react';
-import { useKnownHotkeys } from '../../utils/useKnownHotkeys';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { flexRender, useTable } from '@tanstack/react-table';
+import { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../context/AppContext';
+import { useKnownHotkeys } from '../../utils/useKnownHotkeys';
 
 const { columnHelper, tableOptions } = dataTableHelper<Decision>();
 

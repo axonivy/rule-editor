@@ -1,27 +1,27 @@
 import { type RuleConfig, type RuleContext, type RuleEditorData } from '@axonivy/rule-editor-protocol';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useClient } from '../context/ClientContext';
-import { genQueryKey } from '../query/query-client';
-import { ErrorBoundary } from 'react-error-boundary';
 import {
   Flex,
-  Spinner,
   PanelMessage,
   ResizableGroup,
+  ResizableHandle,
   ResizablePanel,
-  useHotkeys,
-  useHistoryData,
+  Spinner,
   useDefaultLayout,
-  ResizableHandle
+  useHistoryData,
+  useHotkeys
 } from '@axonivy/ui-components';
-import type { Unary } from '../types/types';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { useTranslation } from 'react-i18next';
 import { AppProvider } from '../context/AppContext';
-import { Main } from './main/Main';
-import { ErrorFallback } from './main/ErrorFallback';
+import { useClient } from '../context/ClientContext';
+import { genQueryKey } from '../query/query-client';
+import type { Unary } from '../types/types';
 import { useKnownHotkeys } from '../utils/useKnownHotkeys';
+import { ErrorFallback } from './main/ErrorFallback';
+import { Main } from './main/Main';
 import { RuleToolbar } from './main/RuleToolbar';
 
 export type RuleEditorProps = {

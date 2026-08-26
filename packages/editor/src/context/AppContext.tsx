@@ -1,8 +1,6 @@
-import { type RuleContext, type RuleConfig } from '@axonivy/rule-editor-protocol';
-
+import { type RuleConfig, type RuleContext } from '@axonivy/rule-editor-protocol';
 import { useReadonly, type useHistoryData } from '@axonivy/ui-components';
 import { createContext, use, useState } from 'react';
-
 import type { UpdateConsumer } from '../types/types';
 
 export type UI = {
