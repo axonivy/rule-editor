@@ -124,7 +124,7 @@ export const Main = () => {
     </Flex>
   );
 };
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Controls = ({ table, deleteRule }: { table: ReactTable<DataTableFeatures, Decision>; deleteRule?: () => void }) => {
   const hotkeys = useKnownHotkeys();
   return (
