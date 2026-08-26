@@ -15,10 +15,12 @@ type ContextHelperProps = {
     context?: RuleContext;
     data?: RuleData;
     setData?: (data: RuleData) => void;
-    selectedElement?: string;
-    setSelectedElement?: Dispatch<SetStateAction<string | undefined>>;
+    selectedElement?: number;
+    setSelectedElement?: Dispatch<SetStateAction<number | undefined>>;
     history?: ReturnType<typeof useHistoryData<RuleData>>;
-    validations?: Array<ValidationResult>;
+    // validations?: Array<ValidationResult>;
+    detail: boolean;
+    setDetail: (visible: boolean) => void;
     helpUrl?: string;
   };
 };
@@ -56,14 +58,16 @@ const ContextHelper = ({ appContext, children }: ContextHelperProps & { children
       <QueryClientProvider client={queryClient}>
         <AppProvider
           value={{
-            context: appContext?.context ?? ({ file: '' } as RuleContext),
             data,
+            context: appContext?.context ?? ({ file: '' } as RuleContext),
             // @ts-ignore
             setData: appContext?.setData ? getData => appContext.setData(getData(data)) : () => {},
-            selectedElement: appContext?.selectedElement,
-            setSelectedElement: appContext?.setSelectedElement ?? (() => {}),
+            selectedIndex: appContext?.selectedElement ?? -1,
+            setSelectedIndex: appContext?.setSelectedElement ?? (() => {}),
             history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
-            validations: [],
+            // validations: [],
+            detail: appContext?.detail ?? false,
+            setDetail: appContext?.setDetail ?? (() => {}),
             helpUrl: appContext?.helpUrl ?? ''
           }}
         >
