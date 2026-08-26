@@ -17,21 +17,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
   useHotkeys,
-  useTableKeyHandler,
-  type DataTableFeatures
+  useTableKeyHandler
 } from '@axonivy/ui-components';
 
 import { type Decision } from '@axonivy/rule-editor-protocol';
-import { flexRender, useTable, type ReactTable } from '@tanstack/react-table';
+import { flexRender, useTable } from '@tanstack/react-table';
 import { useAppContext } from '../../context/AppContext';
 import { useMemo, useEffect, useRef } from 'react';
-import { useKnownHotkeys } from '../../utils/useKnonwHotkeys';
+import { useKnownHotkeys } from '../../utils/useKnownHotkeys';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const { columnHelper, tableOptions } = dataTableHelper<Decision>();
 
 export const Main = () => {
+  const { t } = useTranslation();
   const { data, setData, setSelectedIndex, detail, setDetail } = useAppContext();
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
@@ -107,9 +107,7 @@ export const Main = () => {
         ref={firstElementRef}
         className='m-3 min-h-0'
         label={t('label.editorTitle')}
-        control={
-          <Controls table={table} addRule={addRule} deleteRule={table.getSelectedRowModel().flatRows.length > 0 ? deleteRule : undefined} />
-        }
+        control={<Controls addRule={addRule} deleteRule={table.getSelectedRowModel().flatRows.length > 0 ? deleteRule : undefined} />}
         onClick={event => event.stopPropagation()}
       >
         <TableGlobalFilter table={table} />
@@ -134,16 +132,7 @@ export const Main = () => {
   );
 };
 
-const Controls = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  table,
-  addRule,
-  deleteRule
-}: {
-  table: ReactTable<DataTableFeatures, Decision>;
-  addRule: () => void;
-  deleteRule?: () => void;
-}) => {
+const Controls = ({ addRule, deleteRule }: { addRule: () => void; deleteRule?: () => void }) => {
   const hotkeys = useKnownHotkeys();
   return (
     <Flex gap={2}>

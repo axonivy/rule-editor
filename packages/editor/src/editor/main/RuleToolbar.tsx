@@ -18,7 +18,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
-import { useKnownHotkeys } from '../../utils/useKnonwHotkeys';
+import { useKnownHotkeys } from '../../utils/useKnownHotkeys';
 
 export const RuleToolbar = () => {
   const { detail, setDetail, context } = useAppContext();

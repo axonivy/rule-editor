@@ -21,7 +21,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { AppProvider } from '../context/AppContext';
 import { Main } from './main/Main';
 import { ErrorFallback } from './main/ErrorFallback';
-import { useKnownHotkeys } from '../utils/useKnonwHotkeys';
+import { useKnownHotkeys } from '../utils/useKnownHotkeys';
 import { RuleToolbar } from './main/RuleToolbar';
 
 export type RuleEditorProps = {
@@ -141,6 +141,7 @@ export const Editor = ({ context }: RuleEditorProps) => {
             <ResizableHandle />
             <ResizablePanel id='rule-editor-detail' defaultSize='25%' minSize='20%'>
               <Flex direction='column' className='h-full'>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <h1>TEST SIDEBAR</h1>
                 {/* <Sidebar ref={detailRef} /> */}
               </Flex>
