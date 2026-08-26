@@ -91,17 +91,20 @@ export const Main = () => {
       return { ...old, decisions: newData };
     });
 
-  const resetSelection = () => {
-    selectRow(table);
-  };
-
   const hotkeys = useKnownHotkeys();
   const ref = useHotkeys<HTMLDivElement>(hotkeys.deleteRule.hotkey, () => deleteRule(), { scopes: ['global'] });
   const firstElementRef = useRef<HTMLDivElement>(null);
   useHotkeys(hotkeys.focusMain.hotkey, () => firstElementRef.current?.focus(), { scopes: ['global'] });
 
   return (
-    <Flex direction='column' ref={ref} onClick={resetSelection} className='h-full overflow-auto'>
+    <Flex
+      direction='column'
+      ref={ref}
+      onClick={() => {
+        selectRow(table);
+      }}
+      className='h-full overflow-auto'
+    >
       <BasicField
         tabIndex={-1}
         ref={firstElementRef}
