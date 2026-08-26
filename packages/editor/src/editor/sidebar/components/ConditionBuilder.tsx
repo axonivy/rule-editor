@@ -11,8 +11,8 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
 
   return (
     <Flex direction='column' gap={2}>
-      {decision.when.map(condition => (
-        <ConditionInput key={`${condition.field}-${condition.operator}-${condition.value}`} condition={condition} />
+      {decision.when.map((condition, index) => (
+        <ConditionInput key={`${condition.field}-${condition.operator}-${condition.value}`} condition={condition} conditionIndex={index} />
       ))}
       <Button onClick={addCondition} icon={IvyIcons.Plus} aria-label='Add Condition' variant='outline'>
         Add Condition
