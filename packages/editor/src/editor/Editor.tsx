@@ -33,7 +33,7 @@ export const Editor = ({ context }: RuleEditorProps) => {
 
   const [detail, setDetail] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [initialData, setInitialData] = useState<RuleConfig | undefined>(undefined);
+  const initialDataRef = useRef<RuleConfig | undefined>(undefined);
   const history = useHistoryData<RuleConfig>();
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'role-editor-resize', storage: localStorage });
 
@@ -61,9 +61,13 @@ export const Editor = ({ context }: RuleEditorProps) => {
     };
   }, [client, context, queryClient, queryKeys]);
 
-  if (data?.data !== undefined && initialData === undefined) {
-    setInitialData(data.data.config);
-  }
+  useEffect(() => {
+    if (data?.data.config !== undefined && initialDataRef.current === undefined) {
+      initialDataRef.current = data.data.config;
+      history.push(data.data.config);
+    }
+  }, [data?.data.config, history]);
+
   const mutation = useMutation({
     mutationKey: queryKeys.saveData(context),
     mutationFn: async (updateData: Unary<RuleConfig>) => {
@@ -78,9 +82,6 @@ export const Editor = ({ context }: RuleEditorProps) => {
       }
       return Promise.resolve();
     }
-  });
-  useEffect(() => {
-    console.log('query state', { isPending, isError, data, error });
   });
 
   const detailRef = useRef<HTMLDivElement>(null);
