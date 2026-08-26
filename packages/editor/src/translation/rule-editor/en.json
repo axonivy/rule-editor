@@ -8,6 +8,9 @@
       "redo": "Redo ({{hotkey}})",
       "undo": "Undo ({{hotkey}})"
     },
+    "label": {
+      "details": "Details"
+    },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"
     }
@@ -24,7 +27,6 @@
     "notFound": "Not found"
   },
   "title": {
-    "detail": "Role",
     "main": "Roles - {{name}}"
   }
 }

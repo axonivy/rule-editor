@@ -8,6 +8,9 @@
       "redo": "Wiederholen ({{hotkey}})",
       "undo": "Rückgängig ({{hotkey}})"
     },
+    "label": {
+      "details": "Details"
+    },
     "message": {
       "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
     }
@@ -24,7 +27,6 @@
     "notFound": "Nicht gefunden"
   },
   "title": {
-    "detail": "Rolle",
     "main": "Rollen - {{name}}"
   }
 }
