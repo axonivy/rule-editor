@@ -9,11 +9,8 @@
       "undo": "Undo ({{hotkey}})"
     },
     "label": {
-      "cancel": "Cancel",
       "details": "Details",
-      "displayName": "Display Name",
-      "name": "Name",
-      "remove": "Remove"
+      "name": "Name"
     },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"

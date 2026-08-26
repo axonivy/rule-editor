@@ -9,11 +9,8 @@
       "undo": "Rückgängig ({{hotkey}})"
     },
     "label": {
-      "cancel": "Abbrechen",
       "details": "Details",
-      "displayName": "Anzeigename",
-      "name": "Name",
-      "remove": "Entfernen"
+      "name": "Name"
     },
     "message": {
       "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"

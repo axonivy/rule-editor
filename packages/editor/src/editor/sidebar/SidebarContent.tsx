@@ -2,6 +2,7 @@ import { BasicField, Flex, Input, PanelMessage } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
+import { ConditionSet } from './components/ConditionSet';
 export const SidebarContent = () => {
   const { t } = useTranslation();
   const { data, setData, selectedIndex } = useAppContext();
@@ -30,6 +31,7 @@ export const SidebarContent = () => {
       <BasicField label={t('common.label.name')}>
         <Input value={rule.name} onChange={event => updateName(event.target.value)} />
       </BasicField>
+      <ConditionSet condition={rule.when[0] ?? { field: '', operator: '', value: '' }} />
     </Flex>
   );
 };
