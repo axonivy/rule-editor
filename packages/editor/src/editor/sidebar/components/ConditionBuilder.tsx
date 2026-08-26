@@ -9,10 +9,19 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
     onChange([...decision.when, { field: '', operator: '', value: '' }]);
   };
 
+  const removeCondition = (indexToRemove: number) => {
+    onChange(decision.when.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <Flex direction='column' gap={2}>
       {decision.when.map((condition, index) => (
-        <ConditionInput key={`${condition.field}-${condition.operator}-${condition.value}`} condition={condition} conditionIndex={index} />
+        <ConditionInput
+          key={`${condition.field}-${condition.operator}-${condition.value}`}
+          condition={condition}
+          conditionIndex={index}
+          onRemoveCondition={removeCondition}
+        />
       ))}
       <Button onClick={addCondition} icon={IvyIcons.Plus} aria-label='Add Condition' variant='outline'>
         Add Condition

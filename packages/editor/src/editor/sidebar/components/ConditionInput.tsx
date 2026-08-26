@@ -2,12 +2,20 @@
 import { type Condition } from '@axonivy/rule-editor-protocol';
 import { BasicField, Button, Flex, Input, Label } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-export const ConditionInput = ({ condition, conditionIndex }: { condition: Condition; conditionIndex: number }) => {
+export const ConditionInput = ({
+  condition,
+  conditionIndex,
+  onRemoveCondition
+}: {
+  condition: Condition;
+  conditionIndex: number;
+  onRemoveCondition: (index: number) => void;
+}) => {
   return (
     <Flex direction='column' gap={2} style={{ border: '1px solid white', borderRadius: '12px', padding: '12px' }}>
       <Flex direction='row' gap={4} justifyContent='space-between' alignItems='center'>
         <Label>{`Condition ${conditionIndex + 1}`}</Label>
-        <Button onClick={() => console.log('Remove Condition')} icon={IvyIcons.Trash} aria-label='Remove Condition' />
+        <Button onClick={() => onRemoveCondition(conditionIndex)} icon={IvyIcons.Trash} aria-label='Remove Condition' />
       </Flex>
       <Flex direction='row' gap={4} justifyContent='space-between' alignItems='center'>
         <BasicField label='FIELD'>
