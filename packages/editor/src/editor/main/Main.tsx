@@ -21,7 +21,7 @@ const { columnHelper, tableOptions } = dataTableHelper<Decision>();
 export const Main = () => {
   const { data } = useAppContext();
 
-  const decisions = useMemo(() => data?.desicions ?? [], [data]);
+  const decisions = useMemo(() => data?.decisions ?? [], [data]);
   const columns = useMemo(
     () =>
       columnHelper.columns([

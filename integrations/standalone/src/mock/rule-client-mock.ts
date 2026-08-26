@@ -20,7 +20,7 @@ export class RuleClientMock implements RuleClient {
           description: 'This is a mock rule for testing purposes.',
           matchMode: 'FIRST',
           data: 'mockData',
-          desicions: mockDecisions
+          decisions: mockDecisions
         }
       }
     };

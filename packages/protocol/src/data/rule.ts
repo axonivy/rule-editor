@@ -25,8 +25,8 @@ export interface Rule {
 }
 export interface RuleConfig {
   data: string;
+  decisions: Decision[];
   description: string;
-  desicions: Decision[];
   matchMode: MatchMode;
   name: string;
 }
