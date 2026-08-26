@@ -1,7 +1,19 @@
 /* eslint-disable i18next/no-literal-string */
 import { type Condition } from '@axonivy/rule-editor-protocol';
-import { BasicField, Button, Flex, Input, Label } from '@axonivy/ui-components';
+import { BasicField, BasicSelect, Button, Flex, Input, Label } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
+
+const Operators = [
+  { value: 'equal to', label: 'equal to', info: '=' },
+  { value: 'not equal to', label: 'not equal to', info: '!=' },
+  { value: 'is true', label: 'is true', info: 'is true' },
+  { value: 'is false', label: 'is false', info: 'is false' },
+  { value: 'less than', label: 'less than', info: '<' },
+  { value: 'greater than', label: 'greater than', info: '>' },
+  { value: 'less or equal to', label: 'less or equal to', info: '<=' },
+  { value: 'greater or equal to', label: 'greater or equal to', info: '>=' }
+];
+
 export const ConditionInput = ({
   condition,
   conditionIndex,
@@ -22,7 +34,7 @@ export const ConditionInput = ({
           <Input value={condition.field} />
         </BasicField>
         <BasicField label='OPERATOR'>
-          <Input value={condition.operator} />
+          <BasicSelect items={Operators} />
         </BasicField>
         <BasicField label='VALUE'>
           <Input value={condition.value} />
