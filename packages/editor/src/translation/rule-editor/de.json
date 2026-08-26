@@ -27,6 +27,7 @@
     "notFound": "Nicht gefunden"
   },
   "title": {
-    "main": "Rollen - {{name}}"
+    "detail": "Regel",
+    "main": "Regeln - {{name}}"
   }
 }

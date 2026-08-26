@@ -27,6 +27,7 @@
     "notFound": "Not found"
   },
   "title": {
+    "detail": "Rule",
     "main": "Rules - {{name}}"
   }
 }

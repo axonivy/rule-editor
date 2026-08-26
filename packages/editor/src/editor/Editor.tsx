@@ -23,6 +23,7 @@ import { useKnownHotkeys } from '../utils/useKnownHotkeys';
 import { ErrorFallback } from './main/ErrorFallback';
 import { Main } from './main/Main';
 import { RuleToolbar } from './main/RuleToolbar';
+import { Sidebar } from './sidebar/Sidebar';
 
 export type RuleEditorProps = {
   context: RuleContext;
@@ -139,9 +140,7 @@ export const Editor = ({ context }: RuleEditorProps) => {
             <ResizableHandle />
             <ResizablePanel id='rule-editor-detail' defaultSize='25%' minSize='20%'>
               <Flex direction='column' className='h-full'>
-                {/* eslint-disable-next-line i18next/no-literal-string */}
-                <h1>TEST SIDEBAR</h1>
-                {/* <Sidebar ref={detailRef} /> */}
+                <Sidebar ref={detailRef} />
               </Flex>
             </ResizablePanel>
           </>
