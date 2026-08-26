@@ -1,4 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
+import type { Condition } from '@axonivy/rule-editor-protocol';
 import { BasicField, Collapsible, CollapsibleContent, CollapsibleTrigger, Flex, Input, PanelMessage } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,9 +12,9 @@ export const SidebarContent = () => {
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
 
-  const rule = useMemo(() => decisions[selectedIndex], [decisions, selectedIndex]);
+  const decision = useMemo(() => decisions[selectedIndex], [decisions, selectedIndex]);
 
-  if (rule === undefined) {
+  if (decision === undefined) {
     return <PanelMessage message={t('label.noRuleSelected')} />;
   }
 
@@ -28,6 +29,17 @@ export const SidebarContent = () => {
     });
   };
 
+  const updateConditions = (conditions: Condition[]) => {
+    setData(old => {
+      if (!old.decisions[selectedIndex]) {
+        return old;
+      }
+      const decisions = [...old.decisions];
+      decisions[selectedIndex] = { ...old.decisions[selectedIndex], when: conditions };
+      return { ...old, decisions };
+    });
+  };
+
   return (
     <Flex direction='column' gap={4}>
       <Collapsible defaultOpen={true}>
@@ -35,7 +47,7 @@ export const SidebarContent = () => {
         <CollapsibleContent>
           <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
             <BasicField label={t('common.label.name')}>
-              <Input value={rule.name} onChange={event => updateName(event.target.value)} />
+              <Input value={decision.name} onChange={event => updateName(event.target.value)} />
             </BasicField>
           </Flex>
         </CollapsibleContent>
@@ -44,7 +56,7 @@ export const SidebarContent = () => {
       <Collapsible>
         <CollapsibleTrigger>If</CollapsibleTrigger>
         <CollapsibleContent>
-          <ConditionBuilder rule={rule} />
+          <ConditionBuilder decision={decision} onChange={updateConditions} />
         </CollapsibleContent>
       </Collapsible>
 
