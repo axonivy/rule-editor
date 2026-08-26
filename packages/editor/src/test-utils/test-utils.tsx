@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, type RenderHookOptions } from '@testing-library/react';
 import i18n from 'i18next';
 import { type ReactNode } from 'react';
+import { useHistoryData } from '@axonivy/ui-components';
 import { initReactI18next } from 'react-i18next';
 import { AppProvider } from '../context/AppContext';
 import { ClientContextProvider, type ClientContext } from '../context/ClientContext';
@@ -14,6 +15,12 @@ type ContextHelperProps = {
     context?: RuleContext;
     data?: RuleConfig;
     setData?: (data: RuleConfig) => void;
+    selectedIndex?: number;
+    setSelectedIndex?: (index: number) => void;
+    detail: boolean;
+    setDetail: (visible: boolean) => void;
+    history: ReturnType<typeof useHistoryData<RuleConfig>>;
+    helpUrl?: string;
   };
 };
 
@@ -46,7 +53,13 @@ const ContextHelper = ({ appContext, children }: ContextHelperProps & { children
             context: appContext?.context ?? ({ file: '' } as RuleContext),
             data,
             // @ts-ignore
-            setData: appContext?.setData ? getData => appContext.setData(getData(data)) : () => {}
+            setData: appContext?.setData ? getData => appContext.setData(getData(data)) : () => {},
+            selectedIndex: appContext?.selectedIndex ?? -1,
+            setSelectedIndex: appContext?.setSelectedIndex ?? (() => {}),
+            detail: appContext?.detail ?? false,
+            setDetail: appContext?.setDetail ?? (() => {}),
+            history: { push: () => {}, undo: () => {}, redo: () => {}, canUndo: false, canRedo: false },
+            helpUrl: appContext?.helpUrl ?? ''
           }}
         >
           {children}

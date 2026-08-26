@@ -1,16 +1,26 @@
 import { type RuleConfig, type RuleContext, type Rule } from '@axonivy/rule-editor-protocol';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useClient } from '../context/ClientContext';
 import { genQueryKey } from '../query/query-client';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Flex, Spinner, PanelMessage, ResizableGroup, ResizablePanel } from '@axonivy/ui-components';
+import {
+  Flex,
+  Spinner,
+  PanelMessage,
+  ResizableGroup,
+  ResizablePanel,
+  useHotkeys,
+  useHistoryData,
+  useDefaultLayout
+} from '@axonivy/ui-components';
 import type { Unary } from '../types/types';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { AppProvider } from '../context/AppContext';
 import { Main } from './main/Main';
 import { ErrorFallback } from './main/ErrorFallback';
+import { useKnownHotkeys } from '../utils/useKnonwHotkeys';
 
 export type RuleEditorProps = {
   context: RuleContext;
@@ -19,7 +29,13 @@ export type RuleEditorProps = {
 
 export const Editor = ({ context }: RuleEditorProps) => {
   const { t } = useTranslation();
+
+  const [detail, setDetail] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [initialData, setInitialData] = useState<RuleConfig | undefined>(undefined);
+  const history = useHistoryData<RuleConfig>();
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'role-editor-resize', storage: localStorage });
+
   const client = useClient();
   const queryClient = useQueryClient();
 
@@ -66,6 +82,19 @@ export const Editor = ({ context }: RuleEditorProps) => {
     console.log('query state', { isPending, isError, data, error });
   });
 
+  const detailRef = useRef<HTMLDivElement>(null);
+  const hotkeys = useKnownHotkeys();
+  useHotkeys(
+    hotkeys.focusInscription.hotkey,
+    () => {
+      setDetail(true);
+      detailRef.current?.focus();
+    },
+    {
+      scopes: ['global']
+    }
+  );
+
   if (isPending) {
     return (
       <Flex alignItems='center' justifyContent='center' className='size-full'>
@@ -85,10 +114,16 @@ export const Editor = ({ context }: RuleEditorProps) => {
       value={{
         data: data.data.config,
         context: data.context,
-        setData: mutation.mutate
+        setData: mutation.mutate,
+        selectedIndex,
+        setSelectedIndex,
+        detail,
+        setDetail,
+        history,
+        helpUrl: data.helpUrl
       }}
     >
-      <ResizableGroup orientation='horizontal'>
+      <ResizableGroup orientation='horizontal' defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>
         <ResizablePanel id='rule-editor-main' defaultSize='50%' minSize='30%' className='bg-n75'>
           <Flex direction='column' className='h-full'>
             <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[data]}>
