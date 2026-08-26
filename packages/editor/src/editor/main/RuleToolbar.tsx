@@ -53,10 +53,10 @@ export const RuleToolbar = () => {
 };
 
 const EditButtons = () => {
-  const { history, setUnhistoriedVariables } = useAppContext();
+  const { history, setUnhistorisedData } = useAppContext();
   const hotkeys = useKnownHotkeys();
-  const undo = () => history.undo(setUnhistoriedVariables);
-  const redo = () => history.redo(setUnhistoriedVariables);
+  const undo = () => history.undo(setUnhistorisedData);
+  const redo = () => history.redo(setUnhistorisedData);
   useUndoHotkey(undo, { scopes: ['global'] });
   useRedoHotkey(redo, { scopes: ['global'] });
   return (
