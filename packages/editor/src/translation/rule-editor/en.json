@@ -1,11 +1,32 @@
 {
   "common": {
+    "hotkey": {
+      "focusInscription": "Focus Inscription ({{hotkey}})",
+      "focusMain": "Focus Main ({{hotkey}})",
+      "focusToolbar": "Focus Toolbar ({{hotkey}})",
+      "help": "Open Help ({{hotkey}})",
+      "redo": "Redo ({{hotkey}})",
+      "undo": "Undo ({{hotkey}})"
+    },
+    "label": {
+      "details": "Details"
+    },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"
     }
   },
+  "hotkey": {
+    "addRule": "Add rule ({{hotkey}})",
+    "deleteRule": "Delete rule ({{hotkey}})"
+  },
+  "label": {
+    "editorTitle": "Rule Editor"
+  },
   "message": {
     "errorOnly": "Error: {{error}}",
     "notFound": "Not found"
+  },
+  "title": {
+    "main": "Rules - {{name}}"
   }
 }

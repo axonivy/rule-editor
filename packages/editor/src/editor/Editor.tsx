@@ -1,16 +1,28 @@
-import { type RuleConfig, type RuleContext, type Rule } from '@axonivy/rule-editor-protocol';
+import { type RuleConfig, type RuleContext, type RuleEditorData } from '@axonivy/rule-editor-protocol';
+import {
+  Flex,
+  PanelMessage,
+  ResizableGroup,
+  ResizableHandle,
+  ResizablePanel,
+  Spinner,
+  useDefaultLayout,
+  useHistoryData,
+  useHotkeys
+} from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useTranslation } from 'react-i18next';
+import { AppProvider } from '../context/AppContext';
 import { useClient } from '../context/ClientContext';
 import { genQueryKey } from '../query/query-client';
-import { ErrorBoundary } from 'react-error-boundary';
-import { Flex, Spinner, PanelMessage, ResizableGroup, ResizablePanel } from '@axonivy/ui-components';
 import type { Unary } from '../types/types';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { AppProvider } from '../context/AppContext';
-import { Main } from './main/Main';
+import { useKnownHotkeys } from '../utils/useKnownHotkeys';
 import { ErrorFallback } from './main/ErrorFallback';
+import { Main } from './main/Main';
+import { RuleToolbar } from './main/RuleToolbar';
 
 export type RuleEditorProps = {
   context: RuleContext;
@@ -19,7 +31,13 @@ export type RuleEditorProps = {
 
 export const Editor = ({ context }: RuleEditorProps) => {
   const { t } = useTranslation();
+
+  const [detail, setDetail] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [initialData, setInitialData] = useState<RuleConfig | undefined>(undefined);
+  const history = useHistoryData<RuleConfig>();
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'rule-editor-resize', storage: localStorage });
+
   const client = useClient();
   const queryClient = useQueryClient();
 
@@ -44,27 +62,39 @@ export const Editor = ({ context }: RuleEditorProps) => {
     };
   }, [client, context, queryClient, queryKeys]);
 
-  if (data?.data !== undefined && initialData === undefined) {
+  if (data?.data.config !== undefined && initialData === undefined) {
     setInitialData(data.data.config);
+    history.push(data.data.config);
   }
+
   const mutation = useMutation({
     mutationKey: queryKeys.saveData(context),
     mutationFn: async (updateData: Unary<RuleConfig>) => {
-      const saveData = queryClient.setQueryData<Rule>(queryKeys.data(context), prevData => {
+      const saveData = queryClient.setQueryData<RuleEditorData>(queryKeys.data(context), prevData => {
         if (prevData) {
-          return { ...prevData, data: updateData(prevData.config) };
+          return { ...prevData, data: { ...prevData.data, config: updateData(prevData.data.config) } };
         }
         return undefined;
       });
       if (saveData) {
-        return client.saveData({ context, data: saveData });
+        return client.saveData({ context, data: saveData.data });
       }
       return Promise.resolve();
     }
   });
-  useEffect(() => {
-    console.log('query state', { isPending, isError, data, error });
-  });
+
+  const detailRef = useRef<HTMLDivElement>(null);
+  const hotkeys = useKnownHotkeys();
+  useHotkeys(
+    hotkeys.focusInscription.hotkey,
+    () => {
+      setDetail(true);
+      detailRef.current?.focus();
+    },
+    {
+      scopes: ['global']
+    }
+  );
 
   if (isPending) {
     return (
@@ -85,18 +115,37 @@ export const Editor = ({ context }: RuleEditorProps) => {
       value={{
         data: data.data.config,
         context: data.context,
-        setData: mutation.mutate
+        setData: mutation.mutate,
+        selectedIndex,
+        setSelectedIndex,
+        detail,
+        setDetail,
+        history,
+        helpUrl: data.helpUrl
       }}
     >
-      <ResizableGroup orientation='horizontal'>
+      <ResizableGroup orientation='horizontal' defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>
         <ResizablePanel id='rule-editor-main' defaultSize='50%' minSize='30%' className='bg-n75'>
           <Flex direction='column' className='h-full'>
+            <RuleToolbar />
             <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[data]}>
               <Main />
               {/* {data.data.config.name} */}
             </ErrorBoundary>
           </Flex>
         </ResizablePanel>
+        {detail && (
+          <>
+            <ResizableHandle />
+            <ResizablePanel id='rule-editor-detail' defaultSize='25%' minSize='20%'>
+              <Flex direction='column' className='h-full'>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                <h1>TEST SIDEBAR</h1>
+                {/* <Sidebar ref={detailRef} /> */}
+              </Flex>
+            </ResizablePanel>
+          </>
+        )}
       </ResizableGroup>
     </AppProvider>
   );

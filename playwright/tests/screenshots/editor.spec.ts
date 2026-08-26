@@ -4,5 +4,5 @@ import { screenshotElement } from './screenshot-util';
 
 test('editor', async ({ page }) => {
   await RuleEditor.openMock(page);
-  await screenshotElement(page.getByText('DECISIONS'), 'rule-editor');
+  await screenshotElement(page.getByText('Rule Editor'), 'rule-editor');
 });

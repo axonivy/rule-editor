@@ -7,7 +7,7 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    // "source.organizeImports": "always"
+    "source.organizeImports": "always"
   },
   "search.exclude": {
     "**/node_modules": true,
