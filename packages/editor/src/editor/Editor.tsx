@@ -1,4 +1,4 @@
-import { type RuleConfig, type RuleContext, type Rule } from '@axonivy/rule-editor-protocol';
+import { type RuleConfig, type RuleContext, type RuleEditorData } from '@axonivy/rule-editor-protocol';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -66,14 +66,14 @@ export const Editor = ({ context }: RuleEditorProps) => {
   const mutation = useMutation({
     mutationKey: queryKeys.saveData(context),
     mutationFn: async (updateData: Unary<RuleConfig>) => {
-      const saveData = queryClient.setQueryData<Rule>(queryKeys.data(context), prevData => {
+      const saveData = queryClient.setQueryData<RuleEditorData>(queryKeys.data(context), prevData => {
         if (prevData) {
-          return { ...prevData, data: updateData(prevData.config) };
+          return { ...prevData, data: { ...prevData.data, config: updateData(prevData.data.config) } };
         }
         return undefined;
       });
       if (saveData) {
-        return client.saveData({ context, data: saveData });
+        return client.saveData({ context, data: saveData.data });
       }
       return Promise.resolve();
     }
