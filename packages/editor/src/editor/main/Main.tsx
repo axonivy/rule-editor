@@ -74,6 +74,13 @@ export const Main = () => {
     data: decisions
   });
 
+  const addRule = () => {
+    setData(old => {
+      const newDecision = { name: '', then: [], when: [] };
+      return { ...old, decisions: [...old.decisions, newDecision] };
+    });
+  };
+
   const deleteRule = () =>
     setData(old => {
       const selectedRow = table.getSelectedRowModel().flatRows[0];
@@ -100,7 +107,9 @@ export const Main = () => {
         ref={firstElementRef}
         className='m-3 min-h-0'
         label={t('label.editorTitle')}
-        control={<Controls table={table} deleteRule={table.getSelectedRowModel().flatRows.length > 0 ? deleteRule : undefined} />}
+        control={
+          <Controls table={table} addRule={addRule} deleteRule={table.getSelectedRowModel().flatRows.length > 0 ? deleteRule : undefined} />
+        }
         onClick={event => event.stopPropagation()}
       >
         <TableGlobalFilter table={table} />
@@ -124,12 +133,28 @@ export const Main = () => {
     </Flex>
   );
 };
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Controls = ({ table, deleteRule }: { table: ReactTable<DataTableFeatures, Decision>; deleteRule?: () => void }) => {
+
+const Controls = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  table,
+  addRule,
+  deleteRule
+}: {
+  table: ReactTable<DataTableFeatures, Decision>;
+  addRule: () => void;
+  deleteRule?: () => void;
+}) => {
   const hotkeys = useKnownHotkeys();
   return (
     <Flex gap={2}>
-      {/* TODO: Add "Add Rule" dialog/button here. Might simply be a button, not a full dialog? Uses the table prop*/}
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button icon={IvyIcons.Plus} onClick={addRule} aria-label={hotkeys.addRule.label} />
+          </TooltipTrigger>
+          <TooltipContent>{hotkeys.addRule.label}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>

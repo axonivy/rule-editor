@@ -47,5 +47,5 @@ export const useKnownHotkeys = () => {
     return { hotkey, label: t('common.hotkey.focusInscription', { hotkey: hotkeyText(hotkey) }) };
   }, [t]);
 
-  return { undo, redo, openHelp, addRole: addRule, deleteRule, focusToolbar, focusMain, focusInscription };
+  return { undo, redo, openHelp, addRule, deleteRule, focusToolbar, focusMain, focusInscription };
 };

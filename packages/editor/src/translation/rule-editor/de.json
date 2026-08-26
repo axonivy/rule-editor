@@ -17,10 +17,10 @@
     "notFound": "Nicht gefunden"
   },
   "label": {
-    "editorTitle": "Rule Editor"
+    "editorTitle": "Regel-Editor"
   },
   "hotkey": {
-    "addRule": "Rolle hinzufügen ({{hotkey}})",
-    "deleteRule": "Rolle löschen ({{hotkey}})"
+    "addRule": "Regel hinzufügen ({{hotkey}})",
+    "deleteRule": "Regel löschen ({{hotkey}})"
   }
 }
