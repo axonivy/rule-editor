@@ -1,8 +1,5 @@
 {
   "common": {
-    "message": {
-      "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
-    },
     "hotkey": {
       "focusInscription": "Fokus Detailansicht ({{hotkey}})",
       "focusMain": "Fokus Hauptansicht ({{hotkey}})",
@@ -10,17 +7,20 @@
       "help": "Hilfe öffnen ({{hotkey}})",
       "redo": "Wiederholen ({{hotkey}})",
       "undo": "Rückgängig ({{hotkey}})"
+    },
+    "message": {
+      "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
     }
-  },
-  "message": {
-    "errorOnly": "Fehler: {{error}}",
-    "notFound": "Nicht gefunden"
-  },
-  "label": {
-    "editorTitle": "Regel-Editor"
   },
   "hotkey": {
     "addRule": "Regel hinzufügen ({{hotkey}})",
     "deleteRule": "Regel löschen ({{hotkey}})"
+  },
+  "label": {
+    "editorTitle": "Regel-Editor"
+  },
+  "message": {
+    "errorOnly": "Fehler: {{error}}",
+    "notFound": "Nicht gefunden"
   }
 }
