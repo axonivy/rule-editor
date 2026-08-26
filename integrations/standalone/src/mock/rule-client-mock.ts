@@ -1,31 +1,27 @@
 import { Emitter } from '@axonivy/jsonrpc';
-import type {
-  EditorFileContent,
-  RuleActionArgs,
-  RuleClient,
-  RuleMetaRequestTypes,
-  ValidationResult,
-  RuleSaveData
-} from '@axonivy/rule-editor-protocol';
-import type { RuleEditorData } from '@axonivy/rule-editor-protocol';
-import { mockData, mockDecisions } from './data-mock';
-import { validateMock } from './validation-mock';
+import type { EditorFileContent, RuleClient, RuleEditorData, RuleSaveDataArgs } from '@axonivy/rule-editor-protocol';
+import { mockDecisions } from './data-mock';
 
 export class RuleClientMock implements RuleClient {
   private ruleEditorData: RuleEditorData;
   constructor() {
     this.ruleEditorData = {
+      helpUrl: 'https://www.axonivy.com',
+      readonly: false,
       context: {
         app: 'mockApp',
         file: 'mockFile',
         project: 'mockProject'
       },
       data: {
-        name: 'Mock Rule',
-        description: 'This is a mock rule for testing purposes.',
-        matchMode: 'FIRST',
-        data: mockData,
-        decisions: mockDecisions
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        config: {
+          name: 'Mock Rule',
+          description: 'This is a mock rule for testing purposes.',
+          matchMode: 'FIRST',
+          data: 'mockData',
+          desicions: mockDecisions
+        }
       }
     };
   }
@@ -43,27 +39,8 @@ export class RuleClientMock implements RuleClient {
     return Promise.resolve(this.ruleEditorData);
   }
 
-  saveData(saveData: RuleSaveData): Promise<EditorFileContent> {
+  saveData(saveData: RuleSaveDataArgs): Promise<EditorFileContent> {
     this.ruleEditorData.data = saveData.data;
     return Promise.resolve({ content: '' });
-  }
-
-  validate(): Promise<ValidationResult[]> {
-    return Promise.resolve(validateMock(this.ruleEditorData.data));
-  }
-
-  meta<TMeta extends keyof RuleMetaRequestTypes>(
-    path: TMeta,
-    args: RuleMetaRequestTypes[TMeta][0]
-  ): Promise<RuleMetaRequestTypes[TMeta][1]> {
-    console.log(args);
-    switch (path) {
-      default:
-        throw Error('mock meta path not programmed');
-    }
-  }
-
-  action(action: RuleActionArgs): void {
-    console.log('action', JSON.stringify(action));
   }
 }

@@ -14,31 +14,28 @@ import {
 import { type Decision } from '@axonivy/rule-editor-protocol';
 import { flexRender, useTable } from '@tanstack/react-table';
 import { useAppContext } from '../../context/AppContext';
+import { useMemo } from 'react';
 
 const { columnHelper, tableOptions } = dataTableHelper<Decision>();
 
 export const Main = () => {
   const { data } = useAppContext();
-  const decisions = data?.decisions ?? [];
 
-  const columns = columnHelper.columns([
-    columnHelper.accessor('name', {
-      header: ({ column }) => <SortableHeader column={column} name='NAME' />,
-      cell: cell => (
-        <Flex alignItems='center' gap={1}>
-          <span>{cell.getValue()}</span>
-        </Flex>
-      )
-    }),
-    columnHelper.accessor('description', {
-      header: ({ column }) => <SortableHeader column={column} name='DESCRIPTION' />,
-      cell: cell => (
-        <Flex alignItems='center' gap={1}>
-          <span>{cell.getValue()}</span>
-        </Flex>
-      )
-    })
-  ]);
+  const decisions = useMemo(() => data?.desicions ?? [], [data]);
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.accessor('name', {
+          header: ({ column }) => <SortableHeader column={column} name='NAME' />,
+          cell: cell => (
+            <Flex alignItems='center' gap={1}>
+              <span>{cell.getValue()}</span>
+            </Flex>
+          )
+        })
+      ]),
+    []
+  );
 
   const table = useTable({
     ...tableOptions,

@@ -4,7 +4,6 @@ export const mockData = [{ salaryYear: 50_000, disabled: false, getsBenefits: fa
 export const mockDecisions: Decision[] = [
   {
     name: 'Benefits by salary',
-    description: 'If salary is below 60k, then you get benefits',
     when: [
       {
         field: 'salaryYear',
@@ -21,7 +20,6 @@ export const mockDecisions: Decision[] = [
   },
   {
     name: 'Benefits by disabled',
-    description: 'If disabled, then you get benefits',
     when: [
       {
         field: 'disabled',
@@ -38,7 +36,6 @@ export const mockDecisions: Decision[] = [
   },
   {
     name: 'No benefits for rich disabled',
-    description: 'If disabled and rich, then you get no benefits',
     when: [
       {
         field: 'disabled',

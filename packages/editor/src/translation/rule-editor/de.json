@@ -5,6 +5,7 @@
     }
   },
   "message": {
+    "errorOnly": "Fehler: {{error}}",
     "notFound": "Nicht gefunden"
   }
 }

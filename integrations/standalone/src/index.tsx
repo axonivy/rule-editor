@@ -5,12 +5,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { initTranslation } from './i18n';
 import './index.css';
-import { appParam, directSaveParam, fileParam, pmvParam, readonlyParam, themeParam, webSocketBase } from './url-helper';
+import { appParam, directSaveParam, fileParam, projectParam, readonlyParam, themeParam, webSocketBase } from './url-helper';
 
 export async function start() {
   const server = webSocketBase();
   const app = appParam();
-  const pmv = pmvParam();
+  const pmv = projectParam();
   const file = fileParam();
   const directSave = directSaveParam();
   const theme = themeParam();

@@ -10,16 +10,12 @@ import {
 import type {
   EditorFileContent,
   Event,
-  RuleActionArgs,
   RuleClient,
   RuleContext,
   RuleEditorData,
-  RuleMetaRequestTypes,
-  RuleNotificationTypes,
   RuleOnNotificationTypes,
   RuleRequestTypes,
-  RuleSaveData,
-  ValidationResult
+  RuleSaveDataArgs
 } from '@axonivy/rule-editor-protocol';
 
 export class RuleClientJsonRpc extends BaseRpcClient implements RuleClient {
@@ -48,31 +44,12 @@ export class RuleClientJsonRpc extends BaseRpcClient implements RuleClient {
     return this.sendRequest('data', { ...context });
   }
 
-  saveData(saveData: RuleSaveData): Promise<EditorFileContent> {
+  saveData(saveData: RuleSaveDataArgs): Promise<EditorFileContent> {
     return this.sendRequest('saveData', { ...saveData });
-  }
-
-  validate(context: RuleContext): Promise<ValidationResult[]> {
-    return this.sendRequest('validate', { ...context });
-  }
-
-  meta<TMeta extends keyof RuleMetaRequestTypes>(
-    path: TMeta,
-    args: RuleMetaRequestTypes[TMeta][0]
-  ): Promise<RuleMetaRequestTypes[TMeta][1]> {
-    return this.sendRequest(path, args);
-  }
-
-  action(action: RuleActionArgs): void {
-    void this.sendNotification('action', action);
   }
 
   sendRequest<K extends keyof RuleRequestTypes>(command: K, args?: RuleRequestTypes[K][0]): Promise<RuleRequestTypes[K][1]> {
     return args === undefined ? this.connection.sendRequest(command) : this.connection.sendRequest(command, args);
-  }
-
-  sendNotification<K extends keyof RuleNotificationTypes>(command: K, args: RuleNotificationTypes[K]): Promise<void> {
-    return this.connection.sendNotification(command, args);
   }
 
   onNotification<K extends keyof RuleOnNotificationTypes>(kind: K, listener: (args: RuleOnNotificationTypes[K]) => unknown): Disposable {

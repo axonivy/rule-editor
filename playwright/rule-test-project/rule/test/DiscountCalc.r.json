@@ -1,0 +1,152 @@
+{
+  "$schema": "https://jenkins.ivyteam.io/job/core_json-schema/job/simple-rule-engine/lastSuccessfulBuild/artifact/workspace/ch.ivyteam.ivy.rule.schema/target/schema/14.0-dev/project/rule.json",
+  "config": {
+    "name": "Member Discount Rules",
+    "matchMode": "FIRST",
+    "data": "test.Member",
+    "description": "Calculates a member discount based on member type and purchase amount.",
+    "desicions": [
+      {
+        "name": "No discount",
+        "when": [
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "null"
+          },
+          {
+            "field": "purchaseAmount",
+            "operator": "<",
+            "value": "500"
+          },
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "Silver"
+          }
+        ],
+        "then": [
+          {
+            "field": "discount",
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "name": "Low discount",
+        "when": [
+          {
+            "field": "purchaseAmount",
+            "operator": "<",
+            "value": "500"
+          },
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "Gold"
+          }
+        ],
+        "then": [
+          {
+            "field": "discount",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "name": "Low-medium discount",
+        "when": [
+          {
+            "field": "purchaseAmount",
+            "operator": ">=",
+            "value": "500"
+          },
+          {
+            "field": "purchaseAmount",
+            "operator": "<",
+            "value": "2000"
+          },
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "Silver"
+          }
+        ],
+        "then": [
+          {
+            "field": "discount",
+            "value": "3"
+          }
+        ]
+      },
+      {
+        "name": "High-medium discount",
+        "when": [
+          {
+            "field": "purchaseAmount",
+            "operator": ">=",
+            "value": "2000"
+          },
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "Silver"
+          }
+        ],
+        "then": [
+          {
+            "field": "discount",
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "name": "High discount",
+        "when": [
+          {
+            "field": "purchaseAmount",
+            "operator": ">=",
+            "value": "500"
+          },
+          {
+            "field": "purchaseAmount",
+            "operator": "<",
+            "value": "2000"
+          },
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "Gold"
+          }
+        ],
+        "then": [
+          {
+            "field": "discount",
+            "value": "8"
+          }
+        ]
+      },
+      {
+        "name": "Advanced discount",
+        "when": [
+          {
+            "field": "purchaseAmount",
+            "operator": ">=",
+            "value": "2000"
+          },
+          {
+            "field": "memberType",
+            "operator": "=",
+            "value": "Gold"
+          }
+        ],
+        "then": [
+          {
+            "field": "discount",
+            "value": "10"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -14,7 +14,8 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/rule-editor-protocol": "workspace:~"
+    "@axonivy/rule-editor-protocol": "workspace:~",
+    "react-error-boundary": "^6.1.2"
   },
   "peerDependencies": {
     "@axonivy/jsonrpc": "~14.1.0-next",
