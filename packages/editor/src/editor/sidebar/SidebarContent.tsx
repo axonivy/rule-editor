@@ -3,6 +3,8 @@ import { BasicField, Collapsible, CollapsibleContent, CollapsibleTrigger, Flex, 
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
+import { ConditionBuilder } from './components/ConditionBuilder';
+
 export const SidebarContent = () => {
   const { t } = useTranslation();
   const { data, setData, selectedIndex } = useAppContext();
@@ -41,6 +43,9 @@ export const SidebarContent = () => {
 
       <Collapsible>
         <CollapsibleTrigger>If</CollapsibleTrigger>
+        <CollapsibleContent>
+          <ConditionBuilder rule={rule} />
+        </CollapsibleContent>
       </Collapsible>
 
       <Collapsible>
