@@ -35,20 +35,16 @@ export const Main = () => {
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
 
-  const columns = useMemo(
-    () =>
-      columnHelper.columns([
-        columnHelper.accessor('name', {
-          header: ({ column }) => <SortableHeader column={column} name={t('common.label.nameDecision')} />,
-          cell: cell => (
-            <Flex alignItems='center' gap={1}>
-              <span>{cell.getValue()}</span>
-            </Flex>
-          )
-        })
-      ]),
-    []
-  );
+  const columns = columnHelper.columns([
+    columnHelper.accessor('name', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.nameDecision')} />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          <span>{cell.getValue()}</span>
+        </Flex>
+      )
+    })
+  ]);
 
   const table = useTable({
     ...tableOptions,
