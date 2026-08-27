@@ -21,6 +21,7 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
     <Flex direction='column' gap={4}>
       {decision.when.map((condition, index) => (
         <ConditionInput
+          // eslint-disable-next-line @eslint-react/no-array-index-key
           key={`condition-${index}`}
           condition={condition}
           conditionIndex={index}
