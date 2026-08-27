@@ -29,6 +29,6 @@
   },
   "title": {
     "detail": "Rule",
-    "main": "Rules - {{name}}"
+    "main": "Rule Editor - {{name}}"
   }
 }
