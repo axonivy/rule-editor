@@ -14,7 +14,7 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
   };
 
   return (
-    <Flex direction='column' gap={2}>
+    <Flex direction='column' gap={4}>
       {decision.when.map((condition, index) => (
         <ConditionInput
           key={`${condition.field}-${condition.operator}-${condition.value}`}
