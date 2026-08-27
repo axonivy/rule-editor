@@ -1,10 +1,11 @@
 /* eslint-disable i18next/no-literal-string */
-import type { Condition } from '@axonivy/rule-editor-protocol';
+import type { Action, Condition } from '@axonivy/rule-editor-protocol';
 import { BasicField, Collapsible, CollapsibleContent, CollapsibleTrigger, Flex, Input, PanelMessage } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
 import { ConditionBuilder } from './components/ConditionBuilder';
+import { ResultBuilder } from './components/ResultBuilder';
 
 export const SidebarContent = () => {
   const { t } = useTranslation();
@@ -40,6 +41,17 @@ export const SidebarContent = () => {
     });
   };
 
+  const updateResults = (results: Action[]) => {
+    setData(old => {
+      if (!old.decisions[selectedIndex]) {
+        return old;
+      }
+      const decisions = [...old.decisions];
+      decisions[selectedIndex] = { ...old.decisions[selectedIndex], then: results };
+      return { ...old, decisions };
+    });
+  };
+
   return (
     <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
       <Collapsible defaultOpen={true}>
@@ -62,6 +74,9 @@ export const SidebarContent = () => {
 
       <Collapsible>
         <CollapsibleTrigger>Then</CollapsibleTrigger>
+        <CollapsibleContent>
+          <ResultBuilder decision={decision} onChange={updateResults} />
+        </CollapsibleContent>
       </Collapsible>
     </Flex>
   );

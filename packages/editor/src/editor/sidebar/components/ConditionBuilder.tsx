@@ -9,7 +9,7 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
     onChange([...decision.when, { field: '', operator: '', value: '' }]);
   };
 
-  const updateCondition = (indexToUpdate: number, key: 'field' | 'operator' | 'value', value: string) => {
+  const updateCondition = (indexToUpdate: number, key: keyof Condition, value: string) => {
     onChange(decision.when.map((condition, index) => (index === indexToUpdate ? { ...condition, [key]: value } : condition)));
   };
 
