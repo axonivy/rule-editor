@@ -11,8 +11,8 @@
     "label": {
       "details": "Details",
       "nameDecision": "Rule Name",
-      "nameRuleFile": "Rule File",
-      "nameRuleDataClass": "Rule Data Class"
+      "nameRuleDataClass": "Rule Data Class",
+      "nameRuleFile": "Rule File"
     },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"
