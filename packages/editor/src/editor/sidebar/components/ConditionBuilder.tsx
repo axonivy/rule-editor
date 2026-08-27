@@ -9,6 +9,10 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
     onChange([...decision.when, { field: '', operator: '', value: '' }]);
   };
 
+  const updateCondition = (indexToUpdate: number, key: 'field' | 'operator' | 'value', value: string) => {
+    onChange(decision.when.map((condition, index) => (index === indexToUpdate ? { ...condition, [key]: value } : condition)));
+  };
+
   const removeCondition = (indexToRemove: number) => {
     onChange(decision.when.filter((_, index) => index !== indexToRemove));
   };
@@ -17,9 +21,10 @@ export const ConditionBuilder = ({ decision, onChange }: { decision: Decision; o
     <Flex direction='column' gap={4}>
       {decision.when.map((condition, index) => (
         <ConditionInput
-          key={`${condition.field}-${condition.operator}-${condition.value}`}
+          key={`condition-${index}`}
           condition={condition}
           conditionIndex={index}
+          onConditionChange={updateCondition}
           onRemoveCondition={removeCondition}
         />
       ))}
