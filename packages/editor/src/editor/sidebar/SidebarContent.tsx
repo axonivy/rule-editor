@@ -54,7 +54,7 @@ export const SidebarContent = () => {
       </Collapsible>
 
       <Collapsible>
-        <CollapsibleTrigger>If</CollapsibleTrigger>
+        <CollapsibleTrigger>When</CollapsibleTrigger>
         <CollapsibleContent>
           <ConditionBuilder decision={decision} onChange={updateConditions} />
         </CollapsibleContent>
