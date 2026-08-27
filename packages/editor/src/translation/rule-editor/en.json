@@ -21,7 +21,6 @@
     "deleteRule": "Delete rule ({{hotkey}})"
   },
   "label": {
-    "editorTitle": "Rule Editor",
     "noRuleSelected": "No Rule Selected"
   },
   "message": {

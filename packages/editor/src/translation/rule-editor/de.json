@@ -21,7 +21,6 @@
     "deleteRule": "Regel löschen ({{hotkey}})"
   },
   "label": {
-    "editorTitle": "Regel-Editor",
     "noRuleSelected": "Keine Regel ausgewählt"
   },
   "message": {
