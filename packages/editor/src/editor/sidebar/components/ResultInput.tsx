@@ -28,7 +28,7 @@ export const ResultInput = ({
             style={{ width: '100%' }}
           />
         </Flex>
-        <Flex style={{ flex: 1 }} alignItems='center' justifyContent='center'>
+        <Flex style={{ flex: '0 0 auto' }} alignItems='center' justifyContent='center'>
           <Label>=</Label>
         </Flex>
         <Flex style={{ flex: 10 }}>
