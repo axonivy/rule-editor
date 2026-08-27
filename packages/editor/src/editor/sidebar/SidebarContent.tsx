@@ -1,23 +1,20 @@
 /* eslint-disable i18next/no-literal-string */
 import type { Action, Condition } from '@axonivy/rule-editor-protocol';
-import { BasicField, Collapsible, CollapsibleContent, CollapsibleTrigger, Flex, Input, PanelMessage } from '@axonivy/ui-components';
+import { BasicField, Collapsible, CollapsibleContent, CollapsibleTrigger, Flex, Input } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
 import { ConditionBuilder } from './components/ConditionBuilder';
 import { ResultBuilder } from './components/ResultBuilder';
+import { RuleOverview } from './components/RuleOverview';
 
 export const SidebarContent = () => {
   const { t } = useTranslation();
-  const { data, setData, selectedIndex } = useAppContext();
+  const { data, context, setData, selectedIndex } = useAppContext();
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
 
   const decision = useMemo(() => decisions[selectedIndex], [decisions, selectedIndex]);
-
-  if (decision === undefined) {
-    return <PanelMessage message={t('label.noRuleSelected')} />;
-  }
 
   const updateName = (name: string) => {
     setData(old => {
@@ -51,6 +48,13 @@ export const SidebarContent = () => {
       return { ...old, decisions };
     });
   };
+
+  // TODO: Add updateDataClass event handler for RuleOverview so data class can be changed
+
+  if (decision === undefined) {
+    // return <PanelMessage message={t('label.noRuleSelected')} />;
+    return <RuleOverview data={data} context={context} />;
+  }
 
   return (
     <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
