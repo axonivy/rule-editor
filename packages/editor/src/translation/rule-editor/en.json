@@ -10,7 +10,7 @@
     },
     "label": {
       "details": "Details",
-      "name": "Name"
+      "nameDecision": "Rule Name"
     },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"

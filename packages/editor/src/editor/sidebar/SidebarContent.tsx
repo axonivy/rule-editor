@@ -58,7 +58,7 @@ export const SidebarContent = () => {
         <CollapsibleTrigger>General</CollapsibleTrigger>
         <CollapsibleContent>
           <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
-            <BasicField label={t('common.label.name')}>
+            <BasicField label={t('common.label.nameDecision')}>
               <Input value={decision.name} onChange={event => updateName(event.target.value)} />
             </BasicField>
           </Flex>
@@ -66,14 +66,14 @@ export const SidebarContent = () => {
       </Collapsible>
 
       <Collapsible>
-        <CollapsibleTrigger>When</CollapsibleTrigger>
+        <CollapsibleTrigger>Conditions</CollapsibleTrigger>
         <CollapsibleContent>
           <ConditionBuilder decision={decision} onChange={updateConditions} />
         </CollapsibleContent>
       </Collapsible>
 
       <Collapsible>
-        <CollapsibleTrigger>Then</CollapsibleTrigger>
+        <CollapsibleTrigger>Results</CollapsibleTrigger>
         <CollapsibleContent>
           <ResultBuilder decision={decision} onChange={updateResults} />
         </CollapsibleContent>

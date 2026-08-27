@@ -23,12 +23,14 @@ import { type Decision } from '@axonivy/rule-editor-protocol';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { flexRender, useTable } from '@tanstack/react-table';
 import { useEffect, useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
 import { useKnownHotkeys } from '../../utils/useKnownHotkeys';
 
 const { columnHelper, tableOptions } = dataTableHelper<Decision>();
 
 export const Main = () => {
+  const { t } = useTranslation();
   const { data, setData, setSelectedIndex, detail, setDetail } = useAppContext();
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
@@ -37,7 +39,7 @@ export const Main = () => {
     () =>
       columnHelper.columns([
         columnHelper.accessor('name', {
-          header: ({ column }) => <SortableHeader column={column} name='NAME' />,
+          header: ({ column }) => <SortableHeader column={column} name={t('common.label.nameDecision')} />,
           cell: cell => (
             <Flex alignItems='center' gap={1}>
               <span>{cell.getValue()}</span>
