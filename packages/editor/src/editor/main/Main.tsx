@@ -37,7 +37,15 @@ export const Main = () => {
 
   const columns = columnHelper.columns([
     columnHelper.accessor('name', {
-      header: ({ column }) => <SortableHeader column={column} name={t('common.label.nameDecision')} />,
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelDecision')} />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          <span>{cell.getValue()}</span>
+        </Flex>
+      )
+    }),
+    columnHelper.accessor('name', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelDecision')} />,
       cell: cell => (
         <Flex alignItems='center' gap={1}>
           <span>{cell.getValue()}</span>

@@ -9,9 +9,9 @@ export class RuleClientMock implements RuleClient {
       helpUrl: 'https://www.axonivy.com',
       readonly: false,
       context: {
-        app: 'mockApp',
-        file: 'mockFile',
-        project: 'mockProject'
+        app: 'CarDealership',
+        file: 'rule/DiscountCalc.r.json',
+        project: 'SellCar'
       },
       data: {
         $schema: 'http://json-schema.org/draft-07/schema#',
@@ -19,7 +19,7 @@ export class RuleClientMock implements RuleClient {
           name: 'Mock Rule',
           description: 'This is a mock rule for testing purposes.',
           matchMode: 'FIRST',
-          data: 'test.Member',
+          data: 'dataclass.member.Member',
           decisions: mockDecisions
         }
       }

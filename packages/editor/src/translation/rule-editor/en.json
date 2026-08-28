@@ -10,9 +10,9 @@
     },
     "label": {
       "details": "Details",
-      "nameDecision": "Rule Name",
-      "nameRuleDataClass": "Rule Data Class",
-      "nameRuleFile": "Rule File"
+      "labelDecision": "Rule Name",
+      "labelRuleDataClass": "Rule Data Class",
+      "labelRuleFile": "Rule File"
     },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"

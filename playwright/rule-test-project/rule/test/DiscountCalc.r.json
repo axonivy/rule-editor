@@ -3,7 +3,7 @@
   "config": {
     "name": "Member Discount Rules",
     "matchMode": "FIRST",
-    "data": "test.Member",
+    "data": "dataclass.Member",
     "description": "Calculates a member discount based on member type and purchase amount.",
     "decisions": [
       {
