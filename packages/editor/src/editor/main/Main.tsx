@@ -48,13 +48,17 @@ export const Main = () => {
       header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelConditions')} />,
       cell: cell => (
         <Flex alignItems='center' gap={1}>
-          <span>
-            {cell
-              .getValue()
-              .map(condition => condition.field)
-              .filter(Boolean)
-              .join(', ')}
-          </span>
+          {cell
+            .getValue()
+            .filter(condition => condition.field)
+            .map(condition => (
+              <span
+                key={`${condition.field}-${condition.operator}-${condition.value}`}
+                className='rounded-sm border border-solid border-n100 px-1'
+              >
+                {condition.field}
+              </span>
+            ))}
         </Flex>
       )
     }),
@@ -62,13 +66,14 @@ export const Main = () => {
       header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelAffectedOutputs')} />,
       cell: cell => (
         <Flex alignItems='center' gap={1}>
-          <span>
-            {cell
-              .getValue()
-              .map(action => action.field)
-              .filter(Boolean)
-              .join(', ')}
-          </span>
+          {cell
+            .getValue()
+            .filter(action => action.field)
+            .map(action => (
+              <span key={`${action.field}-${action.value}`} className='rounded-sm border border-solid border-n100 px-1'>
+                {action.field}
+              </span>
+            ))}
         </Flex>
       )
     })
@@ -76,6 +81,7 @@ export const Main = () => {
 
   const table = useTable({
     ...tableOptions,
+    columnResizeMode: 'onChange',
     data: decisions,
     columns
   });
@@ -136,8 +142,8 @@ export const Main = () => {
         onClick={event => event.stopPropagation()}
       >
         <TableGlobalFilter table={table} />
-        <div className='overflow-x-hidden'>
-          <Table onKeyDown={e => handleKeyDown(e, () => setDetail(!detail))}>
+        <div className='overflow-x-auto'>
+          <Table onKeyDown={e => handleKeyDown(e, () => setDetail(!detail))} style={{ width: table.getTotalSize(), maxWidth: 'none' }}>
             <TableResizableHeader headerGroups={table.getHeaderGroups()} />
             <TableBody>
               {table.getRowModel().rows.map(row => (
