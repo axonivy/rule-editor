@@ -57,6 +57,20 @@ export const Main = () => {
           </span>
         </Flex>
       )
+    }),
+    columnHelper.accessor('then', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelAffectedOutputs')} />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          <span>
+            {cell
+              .getValue()
+              .map(action => action.field)
+              .filter(Boolean)
+              .join(', ')}
+          </span>
+        </Flex>
+      )
     })
   ]);
 

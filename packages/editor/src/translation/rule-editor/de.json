@@ -9,6 +9,7 @@
       "undo": "Rückgängig ({{hotkey}})"
     },
     "label": {
+      "labelAffectedOutputs": "Betroffene Outputs",
       "labelConditions": "Nutzt Inputs",
       "details": "Details",
       "labelDecision": "Regelname",
