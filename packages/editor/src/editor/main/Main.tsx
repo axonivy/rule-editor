@@ -51,6 +51,7 @@ export const Main = () => {
           {cell
             .getValue()
             .filter(condition => condition.field)
+            .sort((left, right) => left.field.localeCompare(right.field))
             .map(condition => (
               <span
                 key={`${condition.field}-${condition.operator}-${condition.value}`}
@@ -69,6 +70,7 @@ export const Main = () => {
           {cell
             .getValue()
             .filter(action => action.field)
+            .sort((left, right) => left.field.localeCompare(right.field))
             .map(action => (
               <span key={`${action.field}-${action.value}`} className='rounded-sm border border-solid border-n100 px-1'>
                 {action.field}
@@ -142,8 +144,8 @@ export const Main = () => {
         onClick={event => event.stopPropagation()}
       >
         <TableGlobalFilter table={table} />
-        <div className='overflow-x-auto'>
-          <Table onKeyDown={e => handleKeyDown(e, () => setDetail(!detail))} style={{ width: table.getTotalSize(), maxWidth: 'none' }}>
+        <div className='overflow-x-hidden'>
+          <Table onKeyDown={e => handleKeyDown(e, () => setDetail(!detail))}>
             <TableResizableHeader headerGroups={table.getHeaderGroups()} />
             <TableBody>
               {table.getRowModel().rows.map(row => (

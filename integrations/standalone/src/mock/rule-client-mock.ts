@@ -19,7 +19,7 @@ export class RuleClientMock implements RuleClient {
           name: 'Mock Rule',
           description: 'This is a mock rule for testing purposes.',
           matchMode: 'FIRST',
-          data: 'dataclass.member.Member',
+          data: 'dataclass.sales.Sale',
           decisions: mockDecisions
         }
       }
