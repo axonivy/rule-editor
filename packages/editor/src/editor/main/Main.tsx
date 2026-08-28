@@ -37,10 +37,45 @@ export const Main = () => {
 
   const columns = columnHelper.columns([
     columnHelper.accessor('name', {
-      header: ({ column }) => <SortableHeader column={column} name={t('common.label.nameDecision')} />,
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelDecision')} />,
       cell: cell => (
         <Flex alignItems='center' gap={1}>
           <span>{cell.getValue()}</span>
+        </Flex>
+      )
+    }),
+    columnHelper.accessor('when', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelConditions')} />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          {cell
+            .getValue()
+            .filter(condition => condition.field)
+            .sort((left, right) => left.field.localeCompare(right.field))
+            .map(condition => (
+              <span
+                key={`${condition.field}-${condition.operator}-${condition.value}`}
+                className='rounded-sm border border-solid border-n100 px-1'
+              >
+                {condition.field}
+              </span>
+            ))}
+        </Flex>
+      )
+    }),
+    columnHelper.accessor('then', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelAffectedOutputs')} />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          {cell
+            .getValue()
+            .filter(action => action.field)
+            .sort((left, right) => left.field.localeCompare(right.field))
+            .map(action => (
+              <span key={`${action.field}-${action.value}`} className='rounded-sm border border-solid border-n100 px-1'>
+                {action.field}
+              </span>
+            ))}
         </Flex>
       )
     })
@@ -48,6 +83,7 @@ export const Main = () => {
 
   const table = useTable({
     ...tableOptions,
+    columnResizeMode: 'onChange',
     data: decisions,
     columns
   });

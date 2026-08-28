@@ -12,12 +12,12 @@ export const RuleOverview = ({ data, context }: { data: RuleConfig; context: Rul
         <CollapsibleTrigger>General</CollapsibleTrigger>
         <CollapsibleContent>
           <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
-            <BasicField label={t('common.label.nameRuleFile')}>
+            <BasicField label={t('common.label.labelRuleFile')}>
               <Input value={context.file} readOnly />
             </BasicField>
           </Flex>
           <Flex direction='column' gap={4} className='min-h-0 overflow-auto p-3'>
-            <BasicField label={t('common.label.nameRuleDataClass')}>
+            <BasicField label={t('common.label.labelRuleDataClass')}>
               <Input value={data.data} />
             </BasicField>
           </Flex>

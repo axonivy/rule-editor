@@ -131,7 +131,6 @@ export const Editor = ({ context }: RuleEditorProps) => {
             <RuleToolbar />
             <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[data]}>
               <Main />
-              {/* {data.data.config.name} */}
             </ErrorBoundary>
           </Flex>
         </ResizablePanel>
