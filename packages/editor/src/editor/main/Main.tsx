@@ -35,20 +35,16 @@ export const Main = () => {
 
   const decisions = useMemo(() => data?.decisions ?? [], [data]);
 
-  const columns = useMemo(
-    () =>
-      columnHelper.columns([
-        columnHelper.accessor('name', {
-          header: ({ column }) => <SortableHeader column={column} name='NAME' />,
-          cell: cell => (
-            <Flex alignItems='center' gap={1}>
-              <span>{cell.getValue()}</span>
-            </Flex>
-          )
-        })
-      ]),
-    []
-  );
+  const columns = columnHelper.columns([
+    columnHelper.accessor('name', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.nameDecision')} />,
+      cell: cell => (
+        <Flex alignItems='center' gap={1}>
+          <span>{cell.getValue()}</span>
+        </Flex>
+      )
+    })
+  ]);
 
   const table = useTable({
     ...tableOptions,
@@ -108,7 +104,6 @@ export const Main = () => {
         tabIndex={-1}
         ref={firstElementRef}
         className='m-3 min-h-0'
-        label={t('label.editorTitle')}
         control={<Controls addRule={addRule} deleteRule={table.getSelectedRowModel().flatRows.length > 0 ? deleteRule : undefined} />}
         onClick={event => event.stopPropagation()}
       >

@@ -9,7 +9,10 @@
       "undo": "Undo ({{hotkey}})"
     },
     "label": {
-      "details": "Details"
+      "details": "Details",
+      "nameDecision": "Rule Name",
+      "nameRuleDataClass": "Rule Data Class",
+      "nameRuleFile": "Rule File"
     },
     "message": {
       "errorOccurred": "An error has occurred: {{message}}"
@@ -20,13 +23,14 @@
     "deleteRule": "Delete rule ({{hotkey}})"
   },
   "label": {
-    "editorTitle": "Rule Editor"
+    "noRuleSelected": "No Rule Selected"
   },
   "message": {
     "errorOnly": "Error: {{error}}",
     "notFound": "Not found"
   },
   "title": {
-    "main": "Rules - {{name}}"
+    "detail": "Rule",
+    "main": "Rule Editor - {{name}}"
   }
 }

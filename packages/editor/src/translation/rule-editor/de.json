@@ -9,7 +9,10 @@
       "undo": "Rückgängig ({{hotkey}})"
     },
     "label": {
-      "details": "Details"
+      "details": "Details",
+      "nameDecision": "Regelname",
+      "nameRuleDataClass": "Regel Datenklasse",
+      "nameRuleFile": "Regel File"
     },
     "message": {
       "errorOccurred": "Ein Fehler ist aufgetreten: {{message}}"
@@ -20,13 +23,14 @@
     "deleteRule": "Regel löschen ({{hotkey}})"
   },
   "label": {
-    "editorTitle": "Regel-Editor"
+    "noRuleSelected": "Keine Regel ausgewählt"
   },
   "message": {
     "errorOnly": "Fehler: {{error}}",
     "notFound": "Nicht gefunden"
   },
   "title": {
-    "main": "Rollen - {{name}}"
+    "detail": "Regel",
+    "main": "Regel Editor - {{name}}"
   }
 }

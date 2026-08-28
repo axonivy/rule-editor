@@ -1,57 +1,144 @@
 import type { Decision } from '@axonivy/rule-editor-protocol';
-export const mockData = [{ salaryYear: 50_000, disabled: false, getsBenefits: false }];
 
 export const mockDecisions: Decision[] = [
   {
-    name: 'Benefits by salary',
+    name: 'No discount',
     when: [
       {
-        field: 'salaryYear',
-        operator: '<',
-        value: '60_000'
-      }
-    ],
-    then: [
-      {
-        field: 'getsBenefits',
-        value: 'true'
-      }
-    ]
-  },
-  {
-    name: 'Benefits by disabled',
-    when: [
-      {
-        field: 'disabled',
-        operator: '==',
-        value: 'true'
-      }
-    ],
-    then: [
-      {
-        field: 'getsBenefits',
-        value: 'true'
-      }
-    ]
-  },
-  {
-    name: 'No benefits for rich disabled',
-    when: [
-      {
-        field: 'disabled',
-        operator: '==',
-        value: 'true'
+        field: 'memberType',
+        operator: '=',
+        value: 'null'
       },
       {
-        field: 'salaryYear',
-        operator: '>=',
-        value: '100_000'
+        field: 'purchaseAmount',
+        operator: '<',
+        value: '500'
+      },
+      {
+        field: 'memberType',
+        operator: '=',
+        value: 'Silver'
       }
     ],
     then: [
       {
-        field: 'getsBenefits',
-        value: 'false'
+        field: 'discount',
+        value: '0'
+      }
+    ]
+  },
+  {
+    name: 'Low discount',
+    when: [
+      {
+        field: 'purchaseAmount',
+        operator: '<',
+        value: '500'
+      },
+      {
+        field: 'memberType',
+        operator: '=',
+        value: 'Gold'
+      }
+    ],
+    then: [
+      {
+        field: 'discount',
+        value: '2'
+      }
+    ]
+  },
+  {
+    name: 'Low-medium discount',
+    when: [
+      {
+        field: 'purchaseAmount',
+        operator: '>=',
+        value: '500'
+      },
+      {
+        field: 'purchaseAmount',
+        operator: '<',
+        value: '2000'
+      },
+      {
+        field: 'memberType',
+        operator: '=',
+        value: 'Silver'
+      }
+    ],
+    then: [
+      {
+        field: 'discount',
+        value: '3'
+      }
+    ]
+  },
+  {
+    name: 'High-medium discount',
+    when: [
+      {
+        field: 'purchaseAmount',
+        operator: '>=',
+        value: '2000'
+      },
+      {
+        field: 'memberType',
+        operator: '=',
+        value: 'Silver'
+      }
+    ],
+    then: [
+      {
+        field: 'discount',
+        value: '5'
+      }
+    ]
+  },
+  {
+    name: 'High discount',
+    when: [
+      {
+        field: 'purchaseAmount',
+        operator: '>=',
+        value: '500'
+      },
+      {
+        field: 'purchaseAmount',
+        operator: '<',
+        value: '2000'
+      },
+      {
+        field: 'memberType',
+        operator: '=',
+        value: 'Gold'
+      }
+    ],
+    then: [
+      {
+        field: 'discount',
+        value: '8'
+      }
+    ]
+  },
+  {
+    name: 'Advanced discount',
+    when: [
+      {
+        field: 'purchaseAmount',
+        operator: '>=',
+        value: '2000'
+      },
+      {
+        field: 'memberType',
+        operator: '=',
+        value: 'Gold'
+      }
+    ],
+    then: [
+      {
+        field: 'discount',
+        value: '10'
       }
     ]
   }
