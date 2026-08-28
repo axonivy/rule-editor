@@ -9,6 +9,7 @@
       "undo": "Rückgängig ({{hotkey}})"
     },
     "label": {
+      "labelConditions": "Nutzt Inputs",
       "details": "Details",
       "labelDecision": "Regelname",
       "labelRuleDataClass": "Regel Datenklasse",

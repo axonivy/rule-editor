@@ -44,11 +44,17 @@ export const Main = () => {
         </Flex>
       )
     }),
-    columnHelper.accessor('name', {
-      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelDecision')} />,
+    columnHelper.accessor('when', {
+      header: ({ column }) => <SortableHeader column={column} name={t('common.label.labelConditions')} />,
       cell: cell => (
         <Flex alignItems='center' gap={1}>
-          <span>{cell.getValue()}</span>
+          <span>
+            {cell
+              .getValue()
+              .map(condition => condition.field)
+              .filter(Boolean)
+              .join(', ')}
+          </span>
         </Flex>
       )
     })

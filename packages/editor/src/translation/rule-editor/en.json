@@ -9,6 +9,7 @@
       "undo": "Undo ({{hotkey}})"
     },
     "label": {
+      "labelConditions": "Used Inputs",
       "details": "Details",
       "labelDecision": "Rule Name",
       "labelRuleDataClass": "Rule Data Class",
