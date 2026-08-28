@@ -9,9 +9,9 @@
       "undo": "Rückgängig ({{hotkey}})"
     },
     "label": {
+      "details": "Details",
       "labelAffectedOutputs": "Betroffene Outputs",
       "labelConditions": "Nutzt Inputs",
-      "details": "Details",
       "labelDecision": "Regelname",
       "labelRuleDataClass": "Regel Datenklasse",
       "labelRuleFile": "Regel File"
