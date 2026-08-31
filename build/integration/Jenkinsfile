@@ -37,14 +37,13 @@ pipeline {
     }
     stage('Protocol') {
       when {
-        expression { isReleasingBranch() }
+        expression { isReleasingBranch() && false }
       }
       steps {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node', '-f build/Dockerfile.node .').inside {
-              def branchName = "simple-rule-engine"
-              // def branchName = env.BRANCH_NAME.replace("/", "%252F")
+              def branchName = env.BRANCH_NAME.replace("/", "%252F")
               sh '''
                 pnpm install
                 pnpm run protocol clean
